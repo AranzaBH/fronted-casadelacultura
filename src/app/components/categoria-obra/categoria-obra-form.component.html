@@ -1,0 +1,44 @@
+
+
+<div *ngIf="message"
+     [ngClass]="{'alert-success': messageType === 'success', 'alert-danger': messageType === 'error'}"
+     class="alert mt-3 p-3 rounded shadow text-center">
+  <strong>{{ message }}</strong>
+</div>
+
+<form #formulario="ngForm" (ngSubmit)="save()" class="p-4 rounded shadow bg-white">
+  <h2 class="text-center text-primary mb-4">CATEGORIA OBRA</h2>
+
+  <div class="form-group">
+    <label for="nombre" class="font-weight-bold">Nombre</label>
+    <input
+      type="text"
+      id="nombre"
+      name="nombre"
+      [(ngModel)]="categoriaObra.nombre"
+      class="form-control form-control-lg shadow-sm border-primary"
+      placeholder="Ingrese el nombre"
+      required
+    />
+  </div>
+
+  <div class="form-group mt-3">
+    <label for="descripcion" class="font-weight-bold">Descripción</label>
+    <textarea
+      id="descripcion"
+      name="descripcion"
+      [(ngModel)]="categoriaObra.descripcion"
+      class="form-control form-control-lg shadow-sm border-primary"
+      rows="4"
+      placeholder="Ingrese la descripción"
+      required
+    ></textarea>
+  </div>
+
+  <div class="form-group mt-4 text-center">
+    <button type="submit" class="btn btn-lg text-white px-5 py-3 shadow-sm rounded-pill"
+            style="background-color: #9D2449; transition: 0.3s;">
+      <i class="pi pi-save"></i> Guardar
+    </button>
+  </div>
+</form>
