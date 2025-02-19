@@ -49,8 +49,8 @@ import { CommonModule } from '@angular/common';
             <li><a routerLink="/eventos/presentaciones">Presentaciones</a></li>
           </ul>
         </li>
+        <li><a class="nav-link" routerLink="/iniciarsesion" routerLinkActive="active">Iniciar Sesion</a></li>
 
-        <li><a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
       </ul>
     </nav>
 
