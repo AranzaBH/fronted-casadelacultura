@@ -8,12 +8,22 @@ import { CommonModule } from '@angular/common';
   imports: [RouterModule, CommonModule],
   template: `
     <nav class="main-nav">
+      <div class="logo-container">
+        <!-- Usamos property binding con [src]="logoUrl" -->
+        <img [src]="logoUrl" alt="Logo">
+
+      </div>
+
       <ul class="nav-list">
-        <li><a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+        <li>
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            Inicio
+          </a>
+        </li>
         
         <li class="dropdown">
           <a class="nav-link" routerLink="/obras" routerLinkActive="active">
-            Obras
+            Pictorica
             <span class="dropdown-arrow">▼</span>
           </a>
           <ul class="dropdown-menu">
@@ -26,7 +36,7 @@ import { CommonModule } from '@angular/common';
 
         <li class="dropdown">
           <a class="nav-link" routerLink="/libros" routerLinkActive="active">
-            Libros
+            Literarias
             <span class="dropdown-arrow">▼</span>
           </a>
           <ul class="dropdown-menu">
@@ -39,7 +49,7 @@ import { CommonModule } from '@angular/common';
 
         <li class="dropdown">
           <a class="nav-link" routerLink="/eventos" routerLinkActive="active">
-            Eventos
+            Fonografica
             <span class="dropdown-arrow">▼</span>
           </a>
           <ul class="dropdown-menu">
@@ -49,8 +59,12 @@ import { CommonModule } from '@angular/common';
             <li><a routerLink="/eventos/presentaciones">Presentaciones</a></li>
           </ul>
         </li>
-        <li><a class="nav-link" routerLink="/iniciarsesion" routerLinkActive="active">Iniciar Sesion</a></li>
-
+        <li>
+          <a class="nav-link" routerLink="/Talleres" routerLinkActive="active">Talleres</a>
+        </li>
+        <li>
+          <a class="nav-link" routerLink="/iniciarsesion" routerLinkActive="active">Iniciar Sesion</a>
+        </li>
       </ul>
     </nav>
 
@@ -81,8 +95,63 @@ import { CommonModule } from '@angular/common';
         <p>© 2025 Casa de la Cultura Oaxaqueña. Todos los derechos reservados.</p>
       </div>
     </footer>
-  `
+  `,
+  styles: [`
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background-color: #c4647f;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      max-width: 100px;
+      height: auto;
+      display: block;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: white;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .main-footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+  `]
 })
 export class AppComponent {
   title = 'Casa de la Cultura Oaxaqueña';
+  // Definimos la ruta de la imagen
+  logoUrl: string = 'assets/images/logCC.png';
 }
