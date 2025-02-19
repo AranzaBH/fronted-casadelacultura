@@ -62,7 +62,7 @@ import { CommonModule } from '@angular/common';
       <div class="footer-content">
         <div class="footer-section">
           <h3>Ubicación</h3>
-          <p>Calle Principal #123</p>
+          <p>González Ortega 403, Zona Feb 10 2015, Centro, 68000 Oaxaca de Juárez, Oax.</p>
           <p>Centro Histórico</p>
           <p>Oaxaca de Juárez, Oaxaca</p>
         </div>
@@ -74,7 +74,7 @@ import { CommonModule } from '@angular/common';
         </div>
         <div class="footer-section">
           <h3>Contacto</h3>
-          <p>Tel: (951) 123-4567</p>
+          <p>Tel. 9515161154</p>
         </div>
       </div>
       <div class="copyright">
