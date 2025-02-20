@@ -14,6 +14,7 @@ export class TalleristaComponent {
   goToTipoTaller(): void {
     this.router.navigate(['/tipo-taller']);
     this.router.navigate(['/crear-taller']);
+    this.router.navigate(['/ver-taller']);
   }
 
 }

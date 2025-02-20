@@ -22,12 +22,14 @@
     </button>
     
 
-      <a routerLink="/ver-taller" class="boton-solicitud">
-        <div class="icono">
-          <img src="icono-documento.png" alt="Documento">
-        </div>
-        <span>VER TALLER</span>
-      </a>
+    <button (click)="goToTipoTaller()">
+        <a routerLink="/ver-taller" class="boton-solicitud">
+          <div class="icono">
+            <img src="icono-documento.png" alt="Documento">
+          </div>
+          <span>VER TALLERES</span>
+                </a>
+    </button>
 
       <button (click)="goToTipoTaller()">
         <a routerLink="/crear-taller" class="boton-solicitud">

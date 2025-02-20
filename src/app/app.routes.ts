@@ -75,8 +75,13 @@ export const routes: Routes = [
   },
 
   {
-    path: 'tipo-tallerform',  //no sirve
+    path: 'tipo-tallerform',  //no sirve JAJA
     component: TipoTallerFormComponent
+  },
+
+  {
+    path: 'ver-taller',  //crear talleres
+    component:VerTalleresComponent
   },
 
 
