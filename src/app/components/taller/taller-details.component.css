@@ -1,0 +1,13 @@
+.custom-btn {
+    background-color: transparent;
+    color: #800020; /* Color guinda */
+    border: 2px solid #800020; /* Borde guinda */
+    padding: 8px 16px;
+    transition: all 0.3s ease-in-out; /* Efecto suave */
+  }
+  
+  .custom-btn:hover {
+    background-color: #800020; /* Se pinta de guinda */
+    color: white; /* Texto blanco */
+  }
+  

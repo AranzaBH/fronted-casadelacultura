@@ -1,0 +1,125 @@
+/* Estilo general para los botones */
+button {
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #d3d3d3; /* Gris bajito */
+  color: black; /* Texto negro */
+}
+
+/* Efecto al pasar el cursor */
+button:hover {
+  background-color: #9D2449; /* Color guinda */
+  color: white; /* Texto blanco al pasar el cursor */
+}
+
+/* Botón de búsqueda */
+button.bg-purple-500 {
+  background-color: #d3d3d3; /* Gris bajito */
+  color: black; /* Texto negro */
+}
+
+button.bg-purple-500:hover {
+  background-color: #9D2449; /* Más oscuro al hacer hover */
+}
+
+/* Botón de eliminar */
+button.bg-red-500 {
+  background-color: #d3d3d3; /* Gris bajito */
+  color: black; /* Texto negro */
+}
+
+button.bg-red-500:hover {
+  background-color: #cbc2c4; /* Más oscuro al hacer hover */
+}
+
+/* Botón de crear */
+button.bg-green-500 {
+  background-color: #d3d3d3; /* Gris bajito */
+  color: black; /* Texto negro */
+}
+
+button.bg-green-500:hover {
+  background-color: #9D2449; /* Más oscuro al hacer hover */
+}
+
+.table th, .table td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.table td {
+  border-top: 1px solid #e9ecef;
+}
+
+.table th {
+  background-color: #f8f9fa;
+}
+
+.input-group .form-control {
+  border-radius: 0.375rem;
+}
+
+.input-group .input-group-text {
+  border-radius: 0.375rem;
+}
+
+.paginator {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.ui-toast {
+  z-index: 9999;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.bootstrap-wrapper {
+  min-height: 100vh; /* Asegura que el contenedor ocupe toda la pantalla */
+}
+
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrar verticalmente */
+}
+
+.container {
+  max-width: 80%; /* Limitar el ancho del contenido */
+  margin: auto; /* Centrar horizontalmente */
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+.p-dialog .btn-close {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+

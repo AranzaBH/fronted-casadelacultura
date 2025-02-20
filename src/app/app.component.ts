@@ -9,12 +9,17 @@ import { CommonModule } from '@angular/common';
   template: `
     <nav class="main-nav">
       <div class="logo-container">
-        <!-- Usamos property binding con [src]="logoUrl" -->
-        <img [src]="logoUrl" alt="Logo">
-
+        <img [src]="logoUrl" alt="Logo" class="logo">
       </div>
 
-      <ul class="nav-list">
+      <!-- Botón hamburger para móviles -->
+      <div class="hamburger" (click)="toggleMenu()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+
+      <ul class="nav-list" [class.active]="menuActivo">
         <li>
           <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
             Inicio
@@ -97,12 +102,14 @@ import { CommonModule } from '@angular/common';
     </footer>
   `,
   styles: [`
+    /* Estilos generales */
     .main-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px 20px;
       background-color: #c4647f;
+      position: relative;
     }
     
     .logo-container {
@@ -114,6 +121,21 @@ import { CommonModule } from '@angular/common';
       max-width: 100px;
       height: auto;
       display: block;
+    }
+
+    /* Botón hamburger (oculto en desktop) */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      border-radius: 2px;
     }
 
     .nav-list {
@@ -128,18 +150,36 @@ import { CommonModule } from '@angular/common';
       text-decoration: none;
       color: white;
       font-weight: bold;
+      position: relative;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: relative;
     }
 
     .dropdown-menu {
       display: none;
       position: absolute;
+      top: 100%;
+      left: 0;
       background-color: white;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
       padding: 10px;
+      list-style: none;
+      min-width: 150px;
+      z-index: 1000;
     }
 
     .dropdown:hover .dropdown-menu {
       display: block;
+    }
+
+    .dropdown-menu li a {
+      color: #333;
+      text-decoration: none;
+      display: block;
+      padding: 5px 0;
     }
 
     .main-footer {
@@ -148,10 +188,54 @@ import { CommonModule } from '@angular/common';
       text-align: center;
       padding: 20px;
     }
+
+    /* Responsividad */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+      
+      .nav-list {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background-color: #c4647f;
+        padding: 10px;
+        gap: 10px;
+        border-radius: 5px;
+        display: none;
+      }
+      
+      .nav-list.active {
+        display: flex;
+      }
+      
+      /* Ajustar dropdowns para mobile */
+      .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background-color: transparent;
+        padding: 0;
+      }
+      
+      .dropdown:hover .dropdown-menu {
+        display: none;
+      }
+      
+      .dropdown.active .dropdown-menu {
+        display: block;
+      }
+    }
   `]
 })
 export class AppComponent {
-  title = 'Casa de la Cultura Oaxaqueña';
-  // Definimos la ruta de la imagen
+  title = 'Casa de la cultura';
   logoUrl: string = 'assets/images/logCC.png';
+
+  menuActivo: boolean = false;
+
+  toggleMenu(): void {
+    this.menuActivo = !this.menuActivo;
+  }
 }

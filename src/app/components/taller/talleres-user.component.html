@@ -1,0 +1,47 @@
+
+<div class="bootstrap-wrapper">
+  <div class="container mt-0 d-flex justify-content-center">
+    <div class="row" style="width: 100%; max-width: 1000px;">
+<div class="container mt-1">
+  <h2 class="text-center mb-6">Talleres Inscritos</h2>
+
+  <div class="row">
+    <!-- Verifica si hay talleres inscritos -->
+    <div *ngIf="talleres.length === 0" class="col-12 text-center">
+      <p>No tienes inscripciones en ningún taller.</p>
+    </div>
+
+    <!-- Mostrar cada taller en una tarjeta -->
+    <div class="col-md-4 mb-4" *ngFor="let taller of talleres">
+      <div class="card shadow-sm">
+        <!-- Imagen del taller -->
+        
+        <div class="card-body">
+          <!-- Información del taller -->
+          <h5 class="card-title">{{ taller.nombre }}</h5>
+          <p class="card-text">{{ taller.descripcion }}</p>
+          <p class="text-muted">
+            <strong>Inicio:</strong> {{ taller.fechaInicio | date: 'mediumDate' }}<br />
+            <strong>Fin:</strong> {{ taller.fechaFinal | date: 'mediumDate' }}
+          </p>
+
+          <!-- Estado del taller -->
+          <span
+            class="badge"
+            [ngClass]="{
+              'badge-success': taller.estaActivo,
+              'badge-secondary': !taller.estaActivo
+            }"
+          >
+            {{ taller.estaActivo ? 'Activo' : 'Inactivo' }}
+          </span>
+
+          <!-- Botón para ver actividades -->
+          <button class="btn btn-primary mt-3" (click)="verActividades(taller.id)">
+            Ver Actividades
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

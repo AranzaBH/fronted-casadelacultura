@@ -1,0 +1,119 @@
+<div class="bootstrap-wrapper">
+  <div class="container mt-4 d-flex justify-content-center">
+    <div class="row" style="width: 100%; max-width: 1000px;">
+
+      <!-- Fila de botones -->
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-4 text-left">
+          
+        </div>
+
+        <div class="col-md-4 text-center">
+          <!-- Espacio vacío para balancear -->
+        </div>
+
+
+      </div>
+
+      <!-- Sección de talleres disponibles -->
+      <div class="row mt-3">
+        <h3 class="text-center w-100">Talleres Disponibles</h3>
+        <hr class="w-100" />
+        <p class="text-center">
+          Para obtener más detalles sobre cada taller y las actividades disponibles, haz clic en el botón "Ver Actividades".
+        </p>
+
+
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <div class="input-group">
+            <input
+              #search
+              type="text"
+              [(ngModel)]="params.filtro"
+              (ngModelChange)="onSearch()"
+              placeholder="Buscar por titulo o descripción"
+              class="form-control form-control-lg border-0 shadow-sm"
+            />
+            <span class="input-group-text border-0" style="background-color: #9D2449; color: rgb(237, 235, 235);">
+              <img src="assets/busqueda.png" alt="Buscar" style="width: 20px; height: 20px; object-fit: contain;" />
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <p-table
+        #tablaB
+        [value]="data"
+        [paginator]="true"
+        [rows]="10"
+        [totalRecords]="params.total"
+        [lazy]="true"
+        (onLazyLoad)="mPaginacion($event)"
+        [first]="params.offset"
+        [loading]="!data.length"
+        [rows]="5"
+        [rowsPerPageOptions]="[5,10,20,50,100]"
+        sortMode="multiple"
+        [responsive]="true"
+      >
+
+
+      <ng-template pTemplate="body" let-taller>
+        <tr>
+          <td class="card-container">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ taller.titulo }}</h5>
+                <p class="card-text"><strong>Descripción:</strong> {{ taller.descripcion }}</p>
+                <p class="card-text"><strong>Tipo:</strong> {{ taller.tipoTaller.nombre }}</p>
+                <p class="card-text"><strong>Fecha Inicio:</strong> {{ taller.fechaInico | date: 'yyyy-MM-dd' }}</p>
+                <p class="card-text"><strong>Fecha Final:</strong> {{ taller.fechaFinal | date: 'yyyy-MM-dd' }}</p>
+                <p class="card-text"><strong>Clave:</strong> {{ taller.clave }}</p>
+              </div>
+              <div class="card-footer">
+                <button (click)="verActividades(taller)" class="btn btn-success btn-block">
+                  <i class="pi pi-pencil"></i> Ver actividades
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="paginator">
+        <div class="pagination-container">
+          <p-paginator
+            [rows]="10"
+            [totalRecords]="params.total"
+            [first]="params.offset"
+            (onPageChange)="mPaginacion($event)"
+            [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[10, 20, 50]"
+            class="p-jc-center"
+          ></p-paginator>
+        </div>
+      </ng-template>
+    </p-table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .btn-crear-taller {
+    background-color: white;
+    color: black;
+    border: 1px solid gray;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .btn-crear-taller:hover {
+    background-color: #9D2449; /* Guinda */
+    color: white;
+    border-color: #7A1D38; /* Color más oscuro al borde */
+  }
+</style>

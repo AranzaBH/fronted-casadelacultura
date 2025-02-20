@@ -1,0 +1,88 @@
+/* Ajusta el margen superior del contenedor de la página */
+.content {
+  margin-top: 100px; /* Aumenta el margen superior para mover el contenido hacia abajo */
+  margin-left: 170px; /* Evitar que el contenido se superponga con la imagen izquierda */
+  margin-right: 170px; /* Evitar que el contenido se superponga con la imagen derecha */
+  padding: 20px;
+}
+
+/* Título */
+h3.text-center {
+  margin-top: 40px; /* Ajusta el margen superior del título */
+}
+
+/* Modificar el tamaño de las tarjetas */
+/* Se reduce el ancho máximo y se disminuye el padding para que sean más compactas */
+.card {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para las tarjetas */
+  border-radius: 8px;
+  max-width: 250px;  /* Ancho máximo reducido (ajusta según necesites) */
+  margin: auto;      /* Centra la tarjeta en su columna */
+  transition: transform 0.3s ease; /* Efecto de transición (opcional) */
+}
+
+.card-body {
+  padding: 10px; /* Disminuye el padding interno para que la tarjeta sea más compacta */
+}
+
+.card-title {
+  font-size: 1rem;  /* Tamaño de fuente reducido */
+  font-weight: bold;
+}
+
+/* Estilo de las imágenes dentro de la tarjeta */
+.responsive-image {
+  width: 100%; /* Ajusta la imagen al ancho del contenedor */
+  height: auto; /* Mantiene la relación de aspecto */
+}
+
+/* Botones */
+.card-footer .btn {
+  width: 100%; /* Hace que los botones ocupen todo el ancho de la tarjeta */
+  margin-top: 10px;
+}
+
+/* Ajustar la separación entre tarjetas */
+.row .col-md-4 {
+  margin-bottom: 8px; /* Espacio inferior reducido para juntar más las tarjetas */
+}
+
+
+/* Asegúrate de que las imágenes laterales no cubran el contenido */
+.left-image, .right-image {
+  position: fixed;
+  top: 0;
+  width: 150px; /* Ajusta el tamaño de las imágenes laterales */
+  height: 100%;
+  object-fit: cover;
+  z-index: 500; /* Asegura que las imágenes no cubran el contenido */
+}
+
+.left-image {
+  left: 0;
+}
+
+.right-image {
+  right: 0;
+}
+
+/* Evita que el contenido se superponga con el menú */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.custom-btn {
+  background-color: transparent;
+  color: #800020; /* Color guinda para el texto */
+  border: 2px solid #c9c3c5b8; /* Borde guinda */
+  transition: all 0.3s ease-in-out; /* Efecto suave */
+}
+
+.custom-btn:hover {
+  background-color: #800020; /* Se pinta de guinda */
+  color: white; /* Texto blanco */
+}

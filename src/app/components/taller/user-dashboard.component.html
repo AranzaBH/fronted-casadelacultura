@@ -1,0 +1,29 @@
+<div class="bootstrap-wrapper">
+  <div class="container mt-0">
+    <h3 class="mb-4 text-center">Talleres Disponibles</h3>
+
+    <!-- Usamos g-1 para reducir el espacio entre tarjetas -->
+    <div class="row g-1 justify-content-center">
+      <div class="col-md-4" *ngFor="let taller of talleres">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ taller.tituloTaller }}</h5>
+            <h6 class="card-subtitle mb-4 text-muted">
+              Tipo: {{ taller.tipoTaller?.nombre || 'Sin asignar' }}
+            </h6>
+            <p class="card-text">{{ taller.descripcion }}</p>
+            <p class="card-text">
+              <strong>Inicio:</strong> {{ taller.fechaInico | date: 'mediumDate' }}<br />
+              <strong>Final:</strong> {{ taller.fechaFinal | date: 'mediumDate' }}
+            </p>
+          </div>
+          <div class="card-footer text-center">
+            <a [routerLink]="['/taller', taller.id]" class="btn custom-btn btn-sm">
+              Ver Detalles
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

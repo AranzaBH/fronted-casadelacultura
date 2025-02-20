@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botones Responsivos</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="header">
+      <h1>Panel Tallerista</h1>
+    </header>
+
+    <div class="container">
+        <button (click)="goToTipoTaller()">
+        <a routerLink="/tipo-taller" class="boton-solicitud">
+          <div class="icono">
+            <img src="icono-documento.png" alt="Documento">
+          </div>
+          <span>CREAR CATEGORIA</span>
+                </a>
+    </button>
+    
+
+      <a routerLink="/ver-taller" class="boton-solicitud">
+        <div class="icono">
+          <img src="icono-documento.png" alt="Documento">
+        </div>
+        <span>VER TALLER</span>
+      </a>
+
+      <button (click)="goToTipoTaller()">
+        <a routerLink="/crear-taller" class="boton-solicitud">
+          <div class="icono">
+            <img src="icono-documento.png" alt="Documento">
+          </div>
+          <span>NUEVO TALLER</span>
+                </a>
+    </button>
+
+      <a routerLink="/reportes" class="boton-solicitud">
+        <div class="icono">
+          <img src="icono-documento.png" alt="Documento">
+        </div>
+        <span>REPORTES</span>
+      </a>
+    </div>
+  </body>
+</html>

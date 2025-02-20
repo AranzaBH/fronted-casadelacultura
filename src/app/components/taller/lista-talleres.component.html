@@ -1,0 +1,126 @@
+<div class="bootstrap-wrapper">
+    <div class="container mt-0 d-flex justify-content-center">
+      <div class="row" style="width: 100%; max-width: 1000px;">
+  
+        <!-- Título de la lista -->
+        <h2 class="text-center mt-4" style="color: #121111;">Lista de Talleres</h2>
+  
+        <!-- Buscador -->
+        <div class="row mb-3">
+          <div class="col-12">
+            <div class="input-group">
+              <input
+                #search
+                type="text"
+                [(ngModel)]="params.filtro"
+                (ngModelChange)="onSearch()"
+                placeholder="Buscar por título o descripción"
+                class="form-control form-control-lg border-0 shadow-sm"
+              />
+              <span class="input-group-text border-0" style="background-color: #9D2449; color: rgb(237, 235, 235);">
+                <img src="assets/busqueda.png" alt="Buscar" style="width: 20px; height: 20px; object-fit: contain;" />
+              </span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Tabla de talleres -->
+        <div class="table-responsive">
+          <p-table
+            #tablaB
+            [value]="data"
+            [paginator]="true"
+            [rows]="10"
+            [totalRecords]="params.total"
+            [lazy]="true"
+            (onLazyLoad)="mPaginacion($event)"
+            [first]="params.offset"
+            [loading]="!data.length"
+            [rows]="5"
+            [rowsPerPageOptions]="[5,10,20,50,100]"
+            sortMode="multiple"
+            [responsive]="true"
+            class="table table-bordered table-hover shadow-sm"
+          >
+            <ng-template pTemplate="header">
+              <tr class="bg-light text-center">
+                <th><strong>Id</strong></th>
+                <th><strong>Título</strong></th>
+                <th><strong>Descripción</strong></th>
+                <th><strong>Tipo</strong></th>
+                <th><strong>Fecha Inicio</strong></th>
+                <th><strong>Fecha Final</strong></th>
+                <th><strong>Clave</strong></th>
+                <th><strong>Opciones</strong></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-taller>
+              <tr>
+                <td>{{ taller.id }}</td>
+                <td>{{ taller.titulo }}</td>
+                <td>{{ taller.descripcion }}</td>
+                <td>{{ taller.tipoTaller.nombre }}</td>
+                <td>{{ taller.fechaInico | date: 'yyyy-MM-dd' }}</td>
+                <td>{{ taller.fechaFinal | date: 'yyyy-MM-dd' }}</td>
+                <td>{{ taller.clave }}</td>
+                <td class="text-center">
+                  <button
+                    (click)="editar(taller)"
+                    class="btn btn-sm"
+                    style="background-color: #28a745; color: white;"
+                    title="Editar"
+                  >
+                    <i class="pi pi-pencil"></i> Editar
+                  </button>
+                  <button
+                    (click)="confirmDelete(taller)"
+                    class="btn btn-danger btn-sm"
+                    style="background-color: #9D2449; color: white;"
+                    title="Eliminar"
+                  >
+                    <i class="pi pi-trash"></i> Eliminar
+                  </button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="paginator">
+              <div class="pagination-container">
+                <p-paginator
+                  [rows]="10"
+                  [totalRecords]="params.total"
+                  [first]="params.offset"
+                  (onPageChange)="mPaginacion($event)"
+                  [showCurrentPageReport]="true"
+                  [rowsPerPageOptions]="[10, 20, 50]"
+                  class="p-jc-center"
+                ></p-paginator>
+              </div>
+            </ng-template>
+          </p-table>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  <!-- Diálogo para confirmar eliminación -->
+  <p-dialog
+    [(visible)]="deleteDialog"
+    [modal]="true"
+    [closable]="false"
+    header="Confirmar Eliminación"
+    [contentStyle]="{ 'background-color': '#fff', 'padding': '20px' }"
+    [style]="{ 'width': '30vw', 'box-shadow': '0 2px 10px rgba(0,0,0,0.5)' }"
+  >
+    <ng-template pTemplate="header">
+      <div class="custom-dialog-header" style="background-color: #fff; color: #333; width: 100%;">
+        Confirmar Eliminación
+      </div>
+    </ng-template>
+    <p>¿Está seguro de que desea eliminar el taller <strong>{{ selectedTaller?.titulo }}</strong>?</p>
+    <div class="p-dialog-footer">
+      <button (click)="delete()" class="btn btn-danger">Eliminar</button>
+      <button (click)="deleteDialog = false" class="btn btn-secondary">Cancelar</button>
+    </div>
+  </p-dialog>
+  

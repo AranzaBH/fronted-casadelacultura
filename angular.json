@@ -32,8 +32,10 @@
             "outputPath": "dist/demo",
             "polyfills": ["zone.js"],
             "scripts": [],
-            "styles": ["src/global_styles.css",
-  "node_modules/primeicons/primeicons.css"],
+            "styles": [
+              "src/global_styles.css",
+              "node_modules/primeicons/primeicons.css"
+            ],
             "tsConfig": "tsconfig.app.json"
           }
         },

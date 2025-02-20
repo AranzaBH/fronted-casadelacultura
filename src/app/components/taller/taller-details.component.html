@@ -1,0 +1,43 @@
+<div class="bootstrap-wrapper d-flex justify-content-center mt-1">
+  <div class="card shadow-lg rounded p-4" style="max-width: 500px; width: 100%;">
+    <div class="card-body text-center">
+      <h3 class="mb-3">Detalles del Taller</h3>
+      <h5 class="card-title">{{ taller.tituloTaller }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        Tipo: {{ taller.tipoTaller?.nombreTipoTaller }}
+      </h6>
+      <p class="card-text">{{ taller.descripcion }}</p>
+      <p class="card-text">
+        <strong>Inicio:</strong> {{ taller.fechaInico | date: 'mediumDate' }}<br />
+        <strong>Final:</strong> {{ taller.fechaFinal | date: 'mediumDate' }}
+      </p>
+    </div>
+    
+    <!-- Botones en el pie de la tarjeta -->
+    <div class="card-footer text-center d-flex flex-column align-items-center">
+      <button class="btn custom-btn mb-2" (click)="inscribirse()">Inscribirse</button>
+      <!--<button class="btn custom-btn" (click)="regresar()">Regresar</button>-->
+    </div>
+  </div>
+</div>
+
+<!-- Modal de inscripción -->
+<div class="modal fade" id="enrollModal" tabindex="-1" aria-labelledby="enrollModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="enrollModalLabel">Inscripción completada</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        Ya te has inscrito en el taller.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

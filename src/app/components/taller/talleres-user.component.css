@@ -1,0 +1,18 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  margin-bottom: 15px; /* Espaciado entre las tarjetas */
+}
+
+.row {
+  justify-content: center; /* Centrado de las tarjetas en la fila */
+}
+.card-img-top {
+  width: 100%;  /* Hace que la imagen ocupe todo el ancho disponible */
+  height: 200px;  /* Establece una altura fija */
+  object-fit: cover;  /* Asegura que la imagen se recorte adecuadamente para llenar el área sin deformarse */
+}
