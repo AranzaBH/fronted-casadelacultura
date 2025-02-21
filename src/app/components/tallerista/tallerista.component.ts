@@ -3,18 +3,25 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tallerista',
-  imports: [],
   templateUrl: './tallerista.component.html',
-  styleUrl: './tallerista.component.css'
+  styleUrls: ['./tallerista.component.css']
 })
 export class TalleristaComponent {
   constructor(private router: Router) { }
 
   // Método para redirigir a la ruta "tipo-taller"
-  goToTipoTaller(): void {
-    this.router.navigate(['/tipo-taller']);
-    this.router.navigate(['/crear-taller']);
-    this.router.navigate(['/ver-taller']);
-  }
+// En tu componente .ts
+goToTipoTaller(): void {
+  this.router.navigate(['/tipo-taller']);
+}
+
+goToCrearTaller(): void {
+  this.router.navigate(['/crear-taller']);
+}
+
+goToVerTaller(): void {
+  this.router.navigate(['/ver-taller']);
+}
+
 
 }
