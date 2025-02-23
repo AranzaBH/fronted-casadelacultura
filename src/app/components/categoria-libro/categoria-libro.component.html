@@ -107,7 +107,6 @@
   [closable]="true"
   [responsive]="true"
   [style]="{ width: '50vw' }"
-  header="Agregar o Editar Categoría"
 >
   <app-categoria-libro-form
     [categoria]="categoriaSelect"
@@ -119,13 +118,47 @@
   [(visible)]="deleteDialog"
   [modal]="true"
   [closable]="false"
-  header="Confirmar Eliminación"
-  [contentStyle]="{ 'background-color': '#f8f9fa', 'padding': '20px' }"
-  [style]="{ 'width': '30vw', 'box-shadow': '0 2px 10px rgba(0,0,0,0.5)' }"
+  [contentStyle]="{
+    'background-color': '#ffffff',
+    'padding': '2rem',
+    'border-radius': '12px'
+  }"
+  [style]="{
+    'width': '400px',
+    'max-width': '90vw',
+    'box-shadow': '0 8px 30px rgba(0,0,0,0.12)',
+    'border-radius': '12px'
+  }"
+  styleClass="custom-delete-dialog"
 >
-  <p>¿Está seguro de que desea eliminar la categoría <strong>{{ selectedCategoria?.nombre }}</strong>?</p>
-  <div class="p-dialog-footer">
-    <button (click)="delete()" class="btn btn-danger">Eliminar</button>
-    <button (click)="deleteDialog = false" class="btn btn-secondary">Cancelar</button>
+  <div class="dialog-content">
+    <div class="warning-icon">
+      <i class="pi pi-exclamation-triangle"></i>
+    </div>
+    
+    <p class="confirmation-message">
+      ¿Está seguro de que desea eliminar la categoría
+      <strong class="highlighted-text">{{ selectedCategoria?.nombre }}</strong>
+    </p>
+    
+    <p class="warning-text">Esta acción no se puede deshacer.</p>
+  </div>
+
+  <div class="dialog-footer">
+    <button 
+      (click)="deleteDialog = false"
+      class="cancel-btn"
+    >
+      <i class="pi pi-times"></i>
+      Cancelar
+    </button>
+    
+    <button 
+      (click)="delete()"
+      class="delete-btn"
+    >
+      <i class="pi pi-trash"></i>
+      Eliminar
+    </button>
   </div>
 </p-dialog>

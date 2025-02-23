@@ -43,7 +43,6 @@ export class CategoriaLibroComponent implements OnInit {
   message: string = '';
   messageType: 'success' | 'error' | '' = '';
 
-  // ✅ Inyección de servicio usando inject() para standalone
   private categoriaService = inject(CategoriaLibroService);
 
   ngOnInit() {

@@ -279,3 +279,131 @@
   background-color: var(--color-gold); 
   color: var(--color-burgundy-dark);
 }
+
+:host ::ng-deep {
+  .custom-delete-dialog {
+    .p-dialog-header {
+      padding: 1.5rem 2rem;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+      border-radius: 12px 12px 0 0;
+
+      .p-dialog-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #343a40;
+      }
+    }
+
+    .p-dialog-content {
+      padding: 0;
+      background: #ffffff;
+    }
+  }
+}
+
+.dialog-content {
+  text-align: center;
+  padding: 2rem 1.5rem;
+
+  .warning-icon {
+    margin-bottom: 1.5rem;
+    
+    .pi-exclamation-triangle {
+      font-size: 3rem;
+      color: #ff9800;
+      animation: pulse 2s infinite;
+    }
+  }
+
+  .confirmation-message {
+    font-size: 1.1rem;
+    color: #495057;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+
+    .highlighted-text {
+      color: #2196f3;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      background: rgba(33, 150, 243, 0.1);
+      border-radius: 4px;
+    }
+  }
+
+  .warning-text {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  border-radius: 0 0 12px 12px;
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    i {
+      font-size: 1rem;
+    }
+
+    &.cancel-btn {
+      background: #e9ecef;
+      color: #495057;
+
+      &:hover {
+        background: #dee2e6;
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    &.delete-btn {
+      background: #dc3545;
+      color: white;
+
+      &:hover {
+        background: #c82333;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
