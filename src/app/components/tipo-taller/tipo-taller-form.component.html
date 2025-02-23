@@ -1,36 +1,88 @@
-<div *ngIf="message" [ngClass]="{'alert-success': messageType === 'success', 'alert-danger': messageType === 'error'}" class="alert mt-3">
-  {{ message }}
+<div class="form-wrapper">
+  <div *ngIf="message" 
+       class="alert-custom" 
+       [ngClass]="{'alert-success': messageType === 'success', 'alert-danger': messageType === 'error'}"
+       [@fadeSlide]>
+    <div class="alert-icon">
+      <i [class]="messageType === 'success' ? 'pi pi-check-circle' : 'pi pi-exclamation-circle'"></i>
+    </div>
+    <span class="alert-message">{{ message }}</span>
+  </div>
+
+  <form #formulario="ngForm" (ngSubmit)="save()" class="form-container">
+    <div class="form-header">
+      <div class="form-title-decoration"></div>
+      <h2 class="form-title">
+        {{ !tipoTaller.id ? 'Crear Tipo' : 'Actualizar Tipo' }}
+      </h2>
+      <div class="form-title-decoration"></div>
+    </div>
+
+    <div class="form-body">
+      <div class="form-group">
+        <label for="nombre" class="form-label">
+          <i class="pi pi-tag"></i>
+          <span>Nombre</span>
+        </label>
+        <div class="input-container">
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            [(ngModel)]="tipoTaller.nombre"
+            class="form-control"
+            placeholder="Ingrese el nombre"
+            required
+            #nombre="ngModel"
+          />
+          <span class="focus-border">
+            <i></i>
+          </span>
+        </div>
+        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="error-message">
+          <i class="pi pi-exclamation-circle"></i>
+          El nombre es requerido
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion" class="form-label">
+          <i class="pi pi-align-left"></i>
+          <span>Descripción</span>
+        </label>
+        <div class="input-container">
+          <textarea
+            id="descripcion"
+            name="descripcion"
+            [(ngModel)]="tipoTaller.descripcion"
+            class="form-control"
+            rows="4"
+            placeholder="Ingrese la descripción"
+            required
+            #descripcion="ngModel"
+          ></textarea>
+          <span class="focus-border">
+            <i></i>
+          </span>
+        </div>
+        <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="error-message">
+          <i class="pi pi-exclamation-circle"></i>
+          La descripción es requerida
+        </div>
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <button type="submit" 
+              class="btn-submit" 
+              [disabled]="formulario.invalid"
+              [class.disabled]="formulario.invalid">
+        <span class="button-content">
+          <i class="pi pi-save"></i>
+          <span>Guardar</span>
+        </span>
+        <span class="button-effect"></span>
+      </button>
+    </div>
+  </form>
 </div>
-<form #formulario="ngForm" (ngSubmit)="save()">
-  <div class="form-group">
-    <label for="nombre" class="font-weight-bold">Nombre</label>
-    <input
-      type="text"
-      id="nombre"
-      name="nombre"
-      [(ngModel)]="tipoTaller.nombre"
-      class="form-control form-control-lg shadow-sm"
-      placeholder="Ingrese el nombre"
-      required
-    />
-  </div>
-
-  <div class="form-group mt-3">
-    <label for="descripcion" class="font-weight-bold">Descripción</label>
-    <textarea
-      id="descripcion"
-      name="descripcion"
-      [(ngModel)]="tipoTaller.descripcion"
-      class="form-control form-control-lg shadow-sm"
-      rows="4"
-      placeholder="Ingrese la descripción"
-      required
-    ></textarea>
-  </div>
-
-  <div class="form-group mt-4 text-center">
-    <button type="submit" [disabled]="!formulario.valid" class="btn btn-lg btn-primary px-5 py-3 shadow-sm" style="background-color: #9D2449">
-      <i class="pi pi-save"></i> Guardar
-    </button>
-  </div>
-</form>

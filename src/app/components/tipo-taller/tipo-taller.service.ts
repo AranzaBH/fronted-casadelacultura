@@ -30,8 +30,8 @@ export class TipoTallerService{
     return this.http.post(this.raiz+'/list',body);
   }
 
-  get(id: number): Observable<TipoTaller> {
-    return this.http.get<TipoTaller>(`${this.raiz}/${id}`);
+  get(id: number): any {
+    return this.http.get(`${this.raiz}/${id}`);
   }
 
   save(obj: any) {
@@ -39,7 +39,7 @@ export class TipoTallerService{
   }
 
   update(obj: any) {
-    return this.http.put(this.raiz + '/' + obj.idTipoTaller, obj);
+    return this.http.put(this.raiz + '/' + obj.id, obj);
   }
 
   delete(idTipoTaller: number) {

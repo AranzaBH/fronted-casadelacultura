@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-
+import { trigger, transition, style, animate } from '@angular/animations';
 @Component({
   selector: 'app-tipo-taller-form',
   standalone: true,
@@ -20,7 +20,18 @@ import { InputTextModule } from 'primeng/inputtext';
     DialogModule
   ],
   templateUrl: './tipo-taller-form.component.html',
-  styleUrls: ['./tipo-taller-form.component.css']
+  styleUrls: ['./tipo-taller-form.component.css'],
+  animations: [
+    trigger('fadeSlide', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in', style({ opacity: 0, transform: 'translateY(-20px)' }))
+      ])
+    ])
+  ]
 })
 
 export class TipoTallerFormComponent implements OnInit {
@@ -93,6 +104,7 @@ export class TipoTallerFormComponent implements OnInit {
   }
 
   update(): void {
+    console.log("esto se envia",this.tipoTaller)
     this.tipoTallerService.update(this.tipoTaller).subscribe({
       next: (data: any) => {
         if (data.success) {
