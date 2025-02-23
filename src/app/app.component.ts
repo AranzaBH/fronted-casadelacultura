@@ -27,7 +27,7 @@ import { CommonModule } from '@angular/common';
           </a>
         </li>
         
-        <li class="dropdown">
+        <li class="dropdown" (mouseenter)="mostrarSubMenu()" (mouseleave)="ocultarSubMenu()">
           <a class="nav-link" routerLink="/obras" routerLinkActive="active">
             Obras
             <span class="dropdown-arrow">▼</span>
@@ -40,7 +40,7 @@ import { CommonModule } from '@angular/common';
           </ul>
         </li>
 
-        <li class="dropdown">
+        <li class="dropdown" (mouseenter)="mostrarSubMenu()" (mouseleave)="ocultarSubMenu()">
           <a class="nav-link" routerLink="/libros" routerLinkActive="active">
             Literarias
             <span class="dropdown-arrow">▼</span>
@@ -53,7 +53,7 @@ import { CommonModule } from '@angular/common';
           </ul>
         </li>
 
-        <li class="dropdown">
+        <li class="dropdown" (mouseenter)="mostrarSubMenu()" (mouseleave)="ocultarSubMenu()">
           <a class="nav-link" routerLink="/eventos" routerLinkActive="active">
             Fonografica
             <span class="dropdown-arrow">▼</span>
@@ -66,7 +66,7 @@ import { CommonModule } from '@angular/common';
           </ul>
         </li>
 
-        <li class="dropdown">
+        <li class="dropdown" (mouseenter)="mostrarSubMenu()" (mouseleave)="ocultarSubMenu()">
           <a class="nav-link" routerLink="/obras" routerLinkActive="active">
             Gestión Taller
             <span class="dropdown-arrow">▼</span>
@@ -169,22 +169,29 @@ import { CommonModule } from '@angular/common';
       position: relative;
     }
 
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: white;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      padding: 10px;
-      list-style: none;
-      min-width: 150px;
-      z-index: 1000;
-    }
+   
 
-    .dropdown:hover .dropdown-menu {
-      display: block;
-    }
+    .dropdown-menu {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  list-style: none;
+  min-width: 150px;
+  z-index: 1000;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+  visibility: visible;
+  opacity: 1;
+}
+
 
     .dropdown-menu li a {
       color: #333;
@@ -245,6 +252,21 @@ export class AppComponent {
   logoUrl: string = 'assets/images/logCC.png';
 
   menuActivo: boolean = false;
+subMenuActivo: boolean = false;
+timeout: any;
+
+
+
+mostrarSubMenu(): void {
+  clearTimeout(this.timeout);
+  this.subMenuActivo = true;
+}
+
+ocultarSubMenu(): void {
+  this.timeout = setTimeout(() => {
+    this.subMenuActivo = false;
+  }, 200); 
+}
 
   toggleMenu(): void {
     this.menuActivo = !this.menuActivo;
