@@ -64,9 +64,19 @@ import { CommonModule } from '@angular/common';
             <li><a routerLink="/eventos/presentaciones">Presentaciones</a></li>
           </ul>
         </li>
-        <li>
-          <a class="nav-link" routerLink="/Talleres" routerLinkActive="active">Talleres</a>
+
+        <li class="dropdown">
+          <a class="nav-link" routerLink="/obras" routerLinkActive="active">
+            Gestión Taller
+            <span class="dropdown-arrow">▼</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/tipo-taller">Categorías</a></li>
+            <li><a routerLink="/obras/pintura">Talleres</a></li>
+          </ul>
         </li>
+
+        
         <li>
           <a class="nav-link" routerLink="/iniciarsesion" routerLinkActive="active">Iniciar Sesion</a>
         </li>
