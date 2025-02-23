@@ -9,7 +9,8 @@ import { CommonModule } from '@angular/common';
   template: `
     <nav class="main-nav">
       <div class="logo-container">
-        <img [src]="logoUrl" alt="Logo" class="logo">
+      <img [src]="'assets/images/logCC.png'" alt="Logo" class="logo">
+
       </div>
 
       <!-- Botón hamburger para móviles -->
