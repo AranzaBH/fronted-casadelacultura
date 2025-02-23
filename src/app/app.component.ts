@@ -1,3 +1,4 @@
+import { Tecnica } from './components/tecnicas/Tecnica';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -74,6 +75,16 @@ import { CommonModule } from '@angular/common';
           <ul class="dropdown-menu">
             <li><a routerLink="/tipo-taller">Categorías</a></li>
             <li><a routerLink="/obras/pintura">Talleres</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown" (mouseenter)="mostrarSubMenu()" (mouseleave)="ocultarSubMenu()">
+          <a class="nav-link" routerLink="/tecnica" routerLinkActive="active">
+            Tecnica
+            <span class="dropdown-arrow">▼</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/eventos/exposiciones">Exposiciones</a></li>
           </ul>
         </li>
 
