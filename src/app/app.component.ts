@@ -29,11 +29,11 @@ import { CommonModule } from '@angular/common';
         
         <li class="dropdown">
           <a class="nav-link" routerLink="/obras" routerLinkActive="active">
-            Pictorica
+            Obras
             <span class="dropdown-arrow">▼</span>
           </a>
           <ul class="dropdown-menu">
-            <li><a routerLink="/obras/pintura">Pintura</a></li>
+            <li><a routerLink="/categoria-obra">Categorías</a></li>
             <li><a routerLink="/obras/escultura">Escultura</a></li>
             <li><a routerLink="/obras/artesania">Artesanía</a></li>
             <li><a routerLink="/obras/fotografia">Fotografía</a></li>

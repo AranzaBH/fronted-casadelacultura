@@ -10,6 +10,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { CategoriaObraFormComponent } from './categoria-obra-form.component';
+import { CardModule } from 'primeng/card';
 @Component({
   selector: 'app-categoria-obra-list',
   templateUrl: './categoria-obra-list.component.html',
@@ -22,7 +23,8 @@ import { CategoriaObraFormComponent } from './categoria-obra-form.component';
     PaginatorModule,
     DialogModule,
     ButtonModule,
-    CategoriaObraFormComponent
+    CategoriaObraFormComponent,
+    CardModule
   ]
 })
 

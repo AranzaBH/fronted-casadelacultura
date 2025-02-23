@@ -7,9 +7,11 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { CategoriaObra } from './CategoriaObra';
 import { CategoriaObraService } from './categoria-obra.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 @Component({
   selector: 'app-categoria-obra-form',
   templateUrl: './categoria-obra-form.component.html',
+  styleUrls:['./categoria-obra-form.component.css'],
   imports: [
       CommonModule,
       FormsModule,
@@ -17,7 +19,18 @@ import { CategoriaObraService } from './categoria-obra.service';
       ButtonModule,
       InputTextModule,
       DialogModule
-    ]
+    ],
+    animations: [
+        trigger('fadeSlide', [
+          transition(':enter', [
+            style({ opacity: 0, transform: 'translateY(-20px)' }),
+            animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+          ]),
+          transition(':leave', [
+            animate('300ms ease-in', style({ opacity: 0, transform: 'translateY(-20px)' }))
+          ])
+        ])
+      ]
 })
 
 export class CategoriaObraFormComponent implements OnInit {

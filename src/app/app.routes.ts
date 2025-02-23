@@ -12,6 +12,7 @@ import { VerTalleresComponent } from './components/taller/ver-talleres.component
 import { TipoTallerComponent } from './components/tipo-taller/tipo-taller.component';
 import { TalleristaComponent } from './components/tallerista/tallerista.component';
 import { TipoTallerFormComponent } from './components/tipo-taller/tipo-taller-form.component';
+import { CategoriaObraListComponent } from './components/categoria-obra/categoria-obra-list.component';
 
 export const routes: Routes = [
  
@@ -22,6 +23,11 @@ export const routes: Routes = [
   {
     path:'categoria-libro',
     component:CategoriaLibroComponent
+  },
+
+  {
+    path:'categoria-obra',
+    component:CategoriaObraListComponent
   },
 
   {
