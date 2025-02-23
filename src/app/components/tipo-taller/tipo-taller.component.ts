@@ -12,6 +12,7 @@ import { TableModule } from 'primeng/table';
 import { TipoTallerFormComponent } from './tipo-taller-form.component';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-tipo-taller',
@@ -23,7 +24,9 @@ import { Location } from '@angular/common';
     PaginatorModule,
     DialogModule,
     ButtonModule,
-    TipoTallerFormComponent // Si deseas incluir el formulario dentro de este componente
+    CardModule,
+    TipoTallerFormComponent,
+
   ],
   templateUrl: './tipo-taller.component.html',
   styleUrls:['./tipo-taller.component.css']
@@ -125,8 +128,9 @@ export class TipoTallerComponent implements OnInit {
           this.obtenerDatosTabla();
           this.deleteDialog = false;
         },
-        error: (err) => {
-          this.message =  'Hubo un problema al eliminar el taller.';
+        error: (err:any) => {
+          console.log("e",err)
+          this.message =  err.error.message;
           this.messageType = 'error';
           this.deleteDialog = false;
         },

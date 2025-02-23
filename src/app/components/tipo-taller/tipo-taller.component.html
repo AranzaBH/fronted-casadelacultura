@@ -1,34 +1,19 @@
 <div class="bootstrap-wrapper">
   <div class="container" style="margin-top: 0px;">
-    <div style="margin-top: 0px;">
-      <div class="container mt-5">
-
+    <div class="container mt-5">
+      <p-card styleClass="crema-card">
         <div class="row mb-4 align-items-center">
-          <!-- Imagen como botón de regresar -->
-       
-
-          <div class="col-md-4 text-center">
-            <!-- Espacio vacío en el medio para centrar los botones -->
+          <div class="row mt-5 mb-4 justify-content-center">
+            <div class="col-12 text-center">
+              <h1 class="display-4 fw-bold text-primary">Tipo Taller</h1>
+            </div>
           </div>
 
-          <div class="col-md-4 text-right">
-            <!-- Este espacio está vacío ahora, ya no necesitamos este botón aquí -->
+          <div *ngIf="message" [ngClass]="{'alert-success': messageType === 'success', 'alert-danger': messageType === 'error'}" class="alert mt-3">
+            {{ message }}
           </div>
-        </div>
 
-        <div class="row mt-3">
-          <div class="col text-center">
-            <h1 class="text-center w-100">Crear categoria de Talleres</h1>
-            <hr class="w-100" />
-          </div>
-        </div>
-
-        <div *ngIf="message" [ngClass]="{'alert-success': messageType === 'success', 'alert-danger': messageType === 'error'}" class="alert mt-3">
-          {{ message }}
-        </div>
-
-        <div class="row">
-          <div class="col-12 col-md-12">
+          <div class="col-12 col-md-8">
             <div class="input-group">
               <input
                 #search
@@ -36,49 +21,19 @@
                 [(ngModel)]="params.filtro"
                 (ngModelChange)="onSearch()"
                 placeholder="Buscar por nombre o descripción"
-                class="form-control form-control-lg border-0 shadow-sm"
+                class="form-control form-control-lg border-0 shadow-sm flex-grow-1"
               />
-              <span
-                class="input-group-text border-0"
-                style="background-color: #9D2449; color: rgb(237, 235, 235); width: 8px;"
-              >
-                <img src="assets/busqueda.png" alt="Buscar" style="width: 50px; height: 50px; object-fit: contain;" />
-              </span>
+             
+              <div class="input-group-append">
+                <button (click)="abrirForm()" class="btn btn-lg btn-primary px-5 shadow-sm">
+                  <i class="pi pi-plus"></i> Agregar
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        
 
-        <!-- Botones debajo del buscador -->
-        <div class="row mt-3">
-          <div class="col-12 col-md-6 text-md-left">
-            <!-- Imagen como botón de agregar tipo taller -->
-            <button
-              (click)="abrirForm()"
-              class="btn btn-lg px-5 shadow-sm btn-hover"
-              style="display: flex; align-items: center; justify-content: center; width: 100%; margin-bottom: 10px;"
-            >
-              <img
-                src="assets/agregar.png"
-                alt="Agregar Taller"
-                style="width: 25px; height: 25px; object-fit: contain; margin-right: 10px;"
-              />
-              Categoria
-            </button>
-          </div>
-
-          <div class="col-12 col-md-6 text-md-right">
-            <!-- Botón Crear Taller -->
-            <!--<button
-              (click)="crearTaller()"
-              class="btn btn-lg px-5 shadow-sm btn-hover"
-              style="width: 100%;"
-            >
-              Crear taller
-            </button> -->
-          </div>
-        </div>
-
+        <!-- Tabla -->
         <div class="table-responsive">
           <p-table
             #tablaB
@@ -94,7 +49,7 @@
             [rowsPerPageOptions]="[5,10,20,50,100]"
             sortMode="multiple"
             [responsive]="true"
-            class="table table-bordered table-hover shadow-sm"
+            class="custom-table"
           >
             <ng-template pTemplate="header">
               <tr class="bg-light text-center">
@@ -105,22 +60,19 @@
             </ng-template>
             <ng-template pTemplate="body" let-tipoTaller>
               <tr>
-                <td>{{ tipoTaller.nombre}}</td>
+                <td>{{ tipoTaller.nombre }}</td>
                 <td>{{ tipoTaller.descripcion }}</td>
                 <td class="text-center">
                   <button
                     (click)="editar(tipoTaller)"
-                    class="btn btn-sm"
-                    style="background-color: #28a745; color: white;"
+                    class="btn btn-info btn-sm"
                     title="Editar"
                   >
                     <i class="pi pi-pencil"></i> Editar
                   </button>
-
                   <button
                     (click)="confirmDelete(tipoTaller)"
                     class="btn btn-danger btn-sm"
-                    style="background-color: #9D2449; color: white;"
                     title="Eliminar"
                   >
                     <i class="pi pi-trash"></i> Eliminar
@@ -129,7 +81,6 @@
               </tr>
             </ng-template>
 
-            <!-- Paginación -->
             <ng-template pTemplate="paginator">
               <div class="pagination-container">
                 <p-paginator
@@ -145,79 +96,36 @@
             </ng-template>
           </p-table>
         </div>
-      </div>
+      </p-card>
     </div>
   </div>
-
-  <!-- Dialog para Agregar o Editar Tipo de Taller -->
-  <p-dialog
-  [(visible)]="tipoTallerDialog"
-  [modal]="true"
-  [closable]="false"
-  [responsive]="true"
-  [style]="{ width: '30vw', border: '2px solid #9D2449' }"
-  [contentStyle]="{'background-color': '#fff'}"
->
-  <!-- Encabezado centrado -->
-  <div style="position: relative; padding: 1rem 0; text-align: center;">
-    <h5 class="mb-0" style="width: 100%;">Agregar categoria del taller</h5>
-    <button
-      type="button"
-      class="btn btn-sm btn-close"
-      (click)="cerrarForm()"
-      aria-label="Cerrar"
-      style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);"
-    >
-      <i class="pi pi-times"></i>
-    </button>
-  </div>
-
-  <!-- Formulario centrado -->
-  <div style="display: flex; justify-content: center;">
-    <app-tipo-taller-form
-      [tipoTaller]="tipoTallerSelect"
-      (tipoTallerChange)="cerrarForm()"
-    ></app-tipo-taller-form>
-  </div>
-</p-dialog>
-
-
-
-
-
-  <!-- Dialog para Confirmar Eliminación -->
-  <p-dialog
-    [(visible)]="deleteDialog"
-    [modal]="true"
-    [closable]="false"
-    header="Confirmar Eliminación"
-    [contentStyle]="{ 'background-color': '#fff', 'padding': '20px' }"
-    [style]="{ 'width': '30vw', 'box-shadow': '0 2px 10px rgba(0,0,0,0.5)'}"
-  >
-    <ng-template pTemplate="header">
-      <div class="custom-dialog-header" style="background-color: #fff; color: 333; width: 100%">
-        Confirmar Eliminación
-      </div>
-    </ng-template>
-
-    <p>¿Está seguro de que desea eliminar el taller <strong>{{ selectedTaller?.nombre }}</strong>?</p>
-    <div class="p-dialog-footer">
-      <button (click)="delete()" class="btn btn-danger">Eliminar</button>
-      <button (click)="deleteDialog = false" class="btn btn-secondary">Cancelar</button>
-    </div>
-  </p-dialog>
 </div>
 
-<!-- Estilos CSS -->
-<style>
-  .btn-hover {
-    background-color: white;
-    color: #9D2449;
-    border: 1px solid #9D2449;
-    transition: all 0.3s ease;
-  }
-  .btn-hover:hover {
-    background-color: #9D2449;
-    color: white;
-  }
-</style>
+<p-dialog
+  [(visible)]="tipoTallerDialog"
+  [modal]="true"
+  [closable]="true"
+  [responsive]="true"
+  [style]="{ width: '50vw' }"
+  header="Agregar o Editar Tipo Taller"
+>
+  <app-tipo-taller-form
+    [tipoTaller]="tipoTallerSelect"
+    (tipoTallerChange)="cerrarForm()"
+  ></app-tipo-taller-form>
+</p-dialog>
+
+<p-dialog
+  [(visible)]="deleteDialog"
+  [modal]="true"
+  [closable]="false"
+  header="Confirmar Eliminación"
+  [contentStyle]="{ 'background-color': '#f8f9fa', 'padding': '20px' }"
+  [style]="{ 'width': '30vw', 'box-shadow': '0 2px 10px rgba(0,0,0,0.5)' }"
+>
+  <p>¿Está seguro de que desea eliminar el tipo taller <strong>{{ selectedTaller?.nombre }}</strong>?</p>
+  <div class="p-dialog-footer">
+    <button (click)="delete()" class="btn btn-danger">Eliminar</button>
+    <button (click)="deleteDialog = false" class="btn btn-secondary">Cancelar</button>
+  </div>
+</p-dialog>

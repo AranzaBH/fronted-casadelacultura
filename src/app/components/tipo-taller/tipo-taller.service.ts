@@ -44,7 +44,7 @@ export class TipoTallerService{
 
   delete(idTipoTaller: number) {
     console.log("id que se envia",idTipoTaller)
-    return this.http.delete(this.raiz + '/' + idTipoTaller);
+    return this.http.delete(this.raiz + '/desactivar/' + idTipoTaller);
   }
 
   getTalleres(){
