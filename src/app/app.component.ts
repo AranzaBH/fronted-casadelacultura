@@ -74,7 +74,7 @@ import { CommonModule } from '@angular/common';
           </a>
           <ul class="dropdown-menu">
             <li><a routerLink="/tipo-taller">Categorías</a></li>
-            <li><a routerLink="/obras/pintura">Talleres</a></li>
+            <li><a routerLink="/video">Videos</a></li>
           </ul>
         </li>
 
