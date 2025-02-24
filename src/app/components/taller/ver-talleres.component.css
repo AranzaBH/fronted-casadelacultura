@@ -132,4 +132,18 @@ p-table table {
   border-color: #7A1D38; /* Color más oscuro al borde */
 }
 
+/* buscar */
 
+
+.input-group {
+  width: 100%;
+  display: flex;
+}
+
+.input-group .form-control {
+  flex: 1; 
+  border-radius: 25px 0 0 25px; 
+  border: 1px solid var(--color-burgundy-light);
+  padding: 10px 20px;
+  font-size: 1rem;
+}

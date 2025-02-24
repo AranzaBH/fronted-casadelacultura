@@ -1,0 +1,62 @@
+<div class="bootstrap-wrapper d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      
+      <!-- Columna de la imagen -->
+      <div class="col-12 col-md-5 text-center mb-4 mb-md-0 d-flex align-items-center justify-content-center">
+        <img
+          src="assets/images/logo_circular.png" 
+          alt="logo_circular"
+          [ngStyle]="{ 'width': '300px', 'height': '300px', 'object-fit': 'contain' }"
+          class="img-fluid"
+        />
+      </div>
+
+      <!-- Columna del formulario -->
+      <div class="col- col-md-5 d-flex align-items-center justify-content-center">
+        <mat-card class="p-4 w-100" style="box-shadow: none;">
+          <form (ngSubmit)="formSubmit()">
+            <mat-form-field class="full-width mb-3" appearance="outline">
+              <mat-label>Nombre usuario</mat-label>
+              <input
+                [(ngModel)]="loginData.username"
+                name="username"
+                required
+                matInput
+                placeholder="Correo electrónico"
+              >
+            </mat-form-field>
+            <mat-form-field class="full-width mb-3" appearance="outline">
+              <mat-label>Contraseña</mat-label>
+              <input
+                [(ngModel)]="loginData.password"
+                name="password"
+                required
+                type="password"
+                matInput
+                placeholder="Contraseña"
+              >
+            </mat-form-field>
+
+            <div class="text-center">
+              <button type="submit" mat-raised-button color="primary" class="mb-2">
+                Iniciar sesión
+              </button>
+            </div>
+
+            <div class="text-center mb-2">
+              <a href="admin/rec-password">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <div class="text-center">
+              <p>
+                ¿No tienes una cuenta? <a href="/singnup">Regístrate</a>
+              </p>
+            </div>
+          </form>
+        </mat-card>
+      </div>
+      
+    </div>
+  </div>
+</div>
