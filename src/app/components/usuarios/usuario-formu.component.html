@@ -1,0 +1,230 @@
+
+  <div class="form-wrapper">
+    <div *ngIf="message" 
+         class="alert-custom" 
+         [ngClass]="{'alert-success': messageType === 'success', 'alert-danger': messageType === 'error'}"
+         [@fadeSlide]>
+      <div class="alert-icon">
+        <i [class]="messageType === 'success' ? 'pi pi-check-circle' : 'pi pi-exclamation-circle'"></i>
+      </div>
+      <span class="alert-message">{{ message }}</span>
+    </div>
+  
+    <form #formulario="ngForm" (ngSubmit)="save()" class="form-container">
+      <div class="form-header">
+        <div class="form-title-decoration"></div>
+        <h2 class="form-title">
+          {{ !usuario.id ? 'Crear Usuario' : 'Actualizar Usuario' }}
+        </h2>
+        <div class="form-title-decoration"></div>
+      </div>
+  
+      <div class="form-body">
+        <div class="form-group">
+          <label for="nombre" class="form-label">
+            <i class="pi pi-tag"></i>
+            <span>USERNAME</span>
+          </label>
+          <div class="input-container">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              [(ngModel)]="usuario.username"
+              class="form-control"
+              placeholder="Ingrese el username"
+              required
+              #username="ngModel"
+            />
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+          <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error-message">
+            <i class="pi pi-exclamation-circle"></i>
+            El username es requerido
+          </div>
+        </div>
+  
+          <div class="form-group">
+            <label for="password" class="form-label">
+              <i class="pi pi-tag"></i>
+              <span>Contraseña</span>
+            </label>
+            <div class="input-container">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                [(ngModel)]="usuario.password"
+                class="form-control"
+                placeholder="Ingrese una contraseña"
+                required
+                #password="ngModel"
+              />
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+              <i class="pi pi-exclamation-circle"></i>
+              La contraseña es requerida
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nombre" class="form-label">
+              <i class="pi pi-align-left"></i>
+              <span>Nombre</span>
+            </label>
+            <div class="input-container">
+              <input
+                id="nombre"
+                type="text"
+                name="nombre"
+                [(ngModel)]="usuario.nombre"
+                class="form-control"
+                placeholder="Ingrese el nombre"
+                required
+                #nombre="ngModel"
+              >
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="error-message">
+              <i class="pi pi-exclamation-circle"></i>
+              El nombre es requerido
+            </div>
+          </div>
+        
+
+          <div class="form-group">
+            <label for="apellido" class="form-label">
+              <i class="pi pi-align-left"></i>
+              <span>Apellido</span>
+            </label>
+            <div class="input-container">
+              <input
+                id="apellido"
+                type="text"
+                name="apellido"
+                [(ngModel)]="usuario.apellido"
+                class="form-control"
+                placeholder="Ingrese el apellido"
+                required
+                #apellido="ngModel"
+              >
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+            <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="error-message">
+              <i class="pi pi-exclamation-circle"></i>
+              El apellido es requerido
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="email" class="form-label">
+              <i class="pi pi-align-left"></i>
+              <span>Email</span>
+            </label>
+            <div class="input-container">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                [(ngModel)]="usuario.email"
+                class="form-control"
+                placeholder="Ingrese el email"
+                required
+                #email="ngModel"
+              >
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+              <i class="pi pi-exclamation-circle"></i>
+              El email es requerido
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="telefono" class="form-label">
+              <i class="pi pi-align-left"></i>
+              <span>Télefono</span>
+            </label>
+            <div class="input-container">
+              <input
+                id="telefono"
+                name="telefono"
+                type="email"
+                [(ngModel)]="usuario.telefono"
+                class="form-control"
+                placeholder="Ingrese el telefono"
+                required
+                #telefono="ngModel"
+              >
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+            <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="error-message">
+              <i class="pi pi-exclamation-circle"></i>
+              El telefono es requerido
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="tipo" class="form-label">
+              <i class="pi pi-list"></i>
+              <span>Rol</span>
+            </label>
+            <div class="input-container select-container">
+              <select 
+                id="rol" 
+                name="rol" 
+                [(ngModel)]="usuario.rol" 
+                class="form-control custom-select"
+                required
+                #rol="ngModel"
+              >
+                <option value="" disabled selected>Seleccione un rol</option>
+                <option *ngFor="let rol of roles" [value]="rol">{{ rol}}</option>
+                
+              </select>
+              <span class="select-arrow">
+                <i class="pi pi-chevron-down"></i>
+              </span>
+              <span class="focus-border">
+                <i></i>
+              </span>
+            </div>
+            <div *ngIf="rol.invalid && (rol.dirty || rol.touched)" class="error-message">
+              <i class="pi pi-exclamation-circle"></i>
+              El rol es requerido
+            </div>
+          </div>
+
+        
+      </div>
+  
+      <div class="form-footer">
+        <button type="submit" 
+                class="btn-submit" 
+                [disabled]="formulario.invalid"
+                [class.disabled]="formulario.invalid">
+          <span class="button-content">
+            <i class="pi pi-save"></i>
+            <span>Guardar</span>
+          </span>
+          <span class="button-effect"></span>
+        </button>
+      </div>
+    </form>
+  </div>

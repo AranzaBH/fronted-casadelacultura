@@ -16,6 +16,7 @@ import { CategoriaObraListComponent } from './components/categoria-obra/categori
 import { TecnicaListComponent } from './components/tecnicas/tecnica-list.component';
 import { VideoListComponent } from './components/video/video-list.component';
 import { AutorListComponent } from './components/autor/autor-list.component';
+import { UsuarioListComponent } from './components/usuarios/usuario-list.component';
 
 export const routes: Routes = [
  
@@ -42,6 +43,11 @@ export const routes: Routes = [
   {
     path:'autor',
     component:AutorListComponent
+  },
+
+  {
+    path:'usuarios',
+    component:UsuarioListComponent
   },
 
   {

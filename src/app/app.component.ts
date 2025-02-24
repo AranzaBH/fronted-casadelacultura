@@ -43,6 +43,16 @@ import { CommonModule } from '@angular/common';
         </li>
 
         <li class="dropdown" (mouseenter)="mostrarSubMenu()" (mouseleave)="ocultarSubMenu()">
+          <a class="nav-link" routerLink="/usuarios" routerLinkActive="active">
+            Administración
+            <span class="dropdown-arrow">▼</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/categoria-obra">Usuarios</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown" (mouseenter)="mostrarSubMenu()" (mouseleave)="ocultarSubMenu()">
           <a class="nav-link" routerLink="/libros" routerLinkActive="active">
             Literarias
             <span class="dropdown-arrow">▼</span>
