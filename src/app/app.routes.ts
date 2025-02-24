@@ -15,6 +15,7 @@ import { TipoTallerFormComponent } from './components/tipo-taller/tipo-taller-fo
 import { CategoriaObraListComponent } from './components/categoria-obra/categoria-obra-list.component';
 import { TecnicaListComponent } from './components/tecnicas/tecnica-list.component';
 import { VideoListComponent } from './components/video/video-list.component';
+import { AutorListComponent } from './components/autor/autor-list.component';
 
 export const routes: Routes = [
  
@@ -36,6 +37,11 @@ export const routes: Routes = [
   {
     path:'tecnica',
     component:TecnicaListComponent
+  },
+
+  {
+    path:'autor',
+    component:AutorListComponent
   },
 
   {

@@ -35,6 +35,7 @@ import { CommonModule } from '@angular/common';
           </a>
           <ul class="dropdown-menu">
             <li><a routerLink="/categoria-obra">Categorías</a></li>
+            <li><a routerLink="/autor">Autores</a></li>
             <li><a routerLink="/obras/escultura">Escultura</a></li>
             <li><a routerLink="/obras/artesania">Artesanía</a></li>
             <li><a routerLink="/obras/fotografia">Fotografía</a></li>
