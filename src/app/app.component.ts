@@ -151,9 +151,10 @@ import { CommonModule } from '@angular/common';
     }
 
     .logo {
-      max-width: 100px;
       height: auto;
       display: block;
+      width: 180px; /* Ajusta el tamaño según necesites */
+      height: 1800; /* Mantiene la proporción */
     }
 
     /* Botón hamburger (oculto en desktop) */

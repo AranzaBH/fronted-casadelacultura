@@ -41,7 +41,7 @@ export class CrearActividadComponent implements OnInit {
     private videoService: VideoService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
+  ){
     this.actividadForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.maxLength(200)]],
       taller: [null, Validators.required],

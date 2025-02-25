@@ -22,6 +22,9 @@ import { CrearUsuariosComponent } from './components/usuarios/crear-usuarios.com
 import { ProfileComponent } from './components/usuarios/profile.component';
 import UsuarioFormComponent from './components/usuarios/usuario-form.component';
 import { VerActividadesUsuarioComponent } from './components/usuarios/ver-actividades-usuario.component';
+import { ActividadesComponent } from './components/actividades/actividades-component.component';
+import { ActividadesTallerComponent } from './components/actividades/actividades-taller.component';
+import { CrearActividadComponent } from './components/actividades/crear-actividad.component';
 
 export const routes: Routes = [
  
@@ -145,9 +148,24 @@ export const routes: Routes = [
 
 
 
+//-----------------------------------Actividades----------------------------------
 
-
-
+{
+  path: 'actividades-component',  //
+  component: ActividadesComponent
+},
+{
+  path: 'actividades-taller',  //
+  component: ActividadesTallerComponent
+},
+{
+  path: 'crear-actividad',  //
+  component: CrearActividadComponent
+},
+{
+  path: 'ver-actividad-usuario',  //
+  component: VerActividadesUsuarioComponent
+},
 
 
   {
