@@ -17,6 +17,7 @@ import { TecnicaListComponent } from './components/tecnicas/tecnica-list.compone
 import { VideoListComponent } from './components/video/video-list.component';
 import { AutorListComponent } from './components/autor/autor-list.component';
 import { UsuarioListComponent } from './components/usuarios/usuario-list.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
  
@@ -60,9 +61,14 @@ export const routes: Routes = [
     component: Home2Component
   },
   {
-    path: 'singnup', //login
+    path: 'login', //iniciar sesión
+    component: LoginComponent
+  },
+  {
+    path: 'signup', //registrarse
     component: SignupComponent
   },
+ 
 //-----------------------------------Tallerista----------------------------------
   {
    path: 'tallerista', //Dashboard Tallerista

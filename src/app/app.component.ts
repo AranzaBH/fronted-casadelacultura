@@ -101,7 +101,7 @@ import { CommonModule } from '@angular/common';
 
         
         <li>
-          <a class="nav-link" routerLink="/iniciarsesion" routerLinkActive="active">Iniciar Sesion</a>
+          <a class="nav-link" routerLink="/login" routerLinkActive="active">Iniciar Sesion</a>
         </li>
       </ul>
     </nav>

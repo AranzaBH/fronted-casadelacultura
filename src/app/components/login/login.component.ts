@@ -45,9 +45,15 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(private snack:MatSnackBar,private loginService:LoginService,private router:Router) { }
+  goToSignup(): void {
+    this.router.navigate(['/signup']);
+  }
+ 
+
 
   ngOnInit(): void {
   }
+
 
   formSubmit(){
     if(this.loginData.username.trim() == '' || this.loginData.username.trim() == null){
