@@ -25,6 +25,7 @@ import { VerActividadesUsuarioComponent } from './components/usuarios/ver-activi
 import { ActividadesComponent } from './components/actividades/actividades-component.component';
 import { ActividadesTallerComponent } from './components/actividades/actividades-taller.component';
 import { CrearActividadComponent } from './components/actividades/crear-actividad.component';
+import { CuestionarioComponent } from './components/cuestionario/cuestionario.component';
 
 export const routes: Routes = [
  
@@ -151,20 +152,25 @@ export const routes: Routes = [
 //-----------------------------------Actividades----------------------------------
 
 {
-  path: 'actividades-component',  //
+  path: 'actividades-component',  //DETALLES DE LA ACTIVIDAD
   component: ActividadesComponent
 },
 {
-  path: 'actividades-taller',  //
+  path: 'actividades-taller',  // ACTIVIDADES POR TALLER 
   component: ActividadesTallerComponent
 },
 {
-  path: 'crear-actividad',  //
+  path: 'crear-actividad',  // CREAR ACTIVIDAD
   component: CrearActividadComponent
 },
 {
   path: 'ver-actividad-usuario',  //
   component: VerActividadesUsuarioComponent
+},
+
+{
+  path: 'cuestionario',  //
+  component: CuestionarioComponent
 },
 
 
