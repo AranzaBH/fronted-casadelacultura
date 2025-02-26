@@ -18,6 +18,13 @@ import { VideoListComponent } from './components/video/video-list.component';
 import { AutorListComponent } from './components/autor/autor-list.component';
 import { UsuarioListComponent } from './components/usuarios/usuario-list.component';
 import { LoginComponent } from './components/login/login.component';
+import { CrearUsuariosComponent } from './components/usuarios/crear-usuarios.component';
+import { ProfileComponent } from './components/usuarios/profile.component';
+import UsuarioFormComponent from './components/usuarios/usuario-form.component';
+import { VerActividadesUsuarioComponent } from './components/usuarios/ver-actividades-usuario.component';
+import { ActividadesComponent } from './components/actividades/actividades-component.component';
+import { ActividadesTallerComponent } from './components/actividades/actividades-taller.component';
+import { CrearActividadComponent } from './components/actividades/crear-actividad.component';
 import { LibroFormComponent } from './components/obra-literaria/obra-literaria-form.component';
 import { LibroListComponent } from './components/obra-literaria/obra-literaria.component';
 
@@ -75,7 +82,24 @@ export const routes: Routes = [
     path: 'signup', //registrarse
     component: SignupComponent
   },
- 
+  {
+    path: 'crear-usuario', //registrarse
+    component: CrearUsuariosComponent
+  },
+  {
+    path: 'profile', //registrarse
+    component: ProfileComponent
+  },
+  {
+    path: 'usuario-form', //registrarse
+    component: UsuarioFormComponent
+  },
+  {
+    path: 'ver-actividades', //registrarse
+    component: VerActividadesUsuarioComponent
+  },
+
+
 //-----------------------------------Tallerista----------------------------------
   {
    path: 'tallerista', //Dashboard Tallerista
@@ -131,9 +155,24 @@ export const routes: Routes = [
 
 
 
+//-----------------------------------Actividades----------------------------------
 
-
-
+{
+  path: 'actividades-component',  //
+  component: ActividadesComponent
+},
+{
+  path: 'actividades-taller',  //
+  component: ActividadesTallerComponent
+},
+{
+  path: 'crear-actividad',  //
+  component: CrearActividadComponent
+},
+{
+  path: 'ver-actividad-usuario',  //
+  component: VerActividadesUsuarioComponent
+},
 
 
   {

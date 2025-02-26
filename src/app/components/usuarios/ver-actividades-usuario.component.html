@@ -1,0 +1,40 @@
+<div class="bootstrap-wrapper">
+    <div class="container mt-4 d-flex justify-content-center">
+      <div class="row d-flex justify-content-center" style="width: 100%; max-width: 1000px;">
+        <h3 class="text-center mb-4">Actividades del taller</h3>
+    <div class="col-md-4 d-flex justify-content-end">
+      
+    </div>
+    <div class="container mt-4">
+      <div *ngIf="taller && taller.titulo; else cargandoTaller">
+        <h3 class="text-center">Taller: {{ taller.titulo }} </h3>
+  
+        <p class="text-center">Descripcion: {{ taller.descripcion }}</p>
+  
+        <!-- Lista de actividades -->
+        <div *ngIf="actividades.length > 0; else noActividades">
+          <div *ngFor="let actividad of actividades">
+            <mat-card class="mat-elevation-z4 mb-3" (click)="verDetalles(actividad.id)" style="cursor: pointer;">
+              <mat-card-header>
+                <mat-card-title>{{ actividad.nombre }}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p><strong>Módulo:</strong> {{ actividad.descripcion }}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mensaje cuando no hay actividades -->
+    <ng-template #noActividades>
+      <p class="text-center text-muted">No hay actividades disponibles para este taller.</p>
+    </ng-template>
+  
+    <!-- Mensaje mientras se carga el taller -->
+    <ng-template #cargandoTaller>
+      <p class="text-center text-muted">Cargando información del taller...</p>
+    </ng-template>
+  </div>
+  

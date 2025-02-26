@@ -1,0 +1,78 @@
+<style>
+  .btn-imagen {
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-imagen:hover {
+    background-color: #9D2449;
+  }
+</style>
+
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6">
+    <div class="card shadow p-4">
+      <h3 class="text-center mb-4">Crear Actividad</h3>
+      <form [formGroup]="actividadForm" (ngSubmit)="crearActividad()">
+        
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Nombre de la Actividad</mat-label>
+          <input matInput formControlName="nombre" required>
+        </mat-form-field>
+        
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Selecciona un Taller</mat-label>
+          <mat-select formControlName="taller">
+            <mat-option *ngFor="let taller of talleres" [value]="taller.id">
+              {{ taller.titulo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Contenedor flex para campo de selección y botón de cuestionario -->
+        <div class="d-flex align-items-center">
+          <mat-form-field class="flex-grow-1" appearance="outline">
+            <mat-label>Selecciona un Cuestionario</mat-label>
+            <mat-select formControlName="cuestionario">
+              <mat-option *ngFor="let cuestionario of cuestionarios" [value]="cuestionario.idCuestionario">
+                {{ cuestionario.nombreCuestionario}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <!-- Botón de imagen para agregar cuestionario -->
+          <button type="button" class="btn-imagen shadow-sm mx-2" (click)="abrirSeleccionCuestionario()">
+            <img src="assets/agregar.png" alt="Agregar Cuestionario" width="30">
+          </button>
+        </div>
+
+        <!-- Contenedor flex para campo de selección y botón de video -->
+        <div class="d-flex align-items-center">
+          <mat-form-field class="flex-grow-1" appearance="outline">
+            <mat-label>Selecciona un Video</mat-label>
+            <mat-select formControlName="video">
+              <mat-option *ngFor="let video of videos" [value]="video.id">
+                {{ video.titulo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Botón de imagen para agregar video -->
+          <button type="button" class="btn-imagen shadow-sm mx-2" (click)="abrirSeleccionVideo()">
+            <img src="assets/agregar.png" alt="Agregar Video" width="30">
+          </button>
+        </div>
+
+                
+                
+        <button  type="submit" class="btn btn-custom">Crear Actividad</button>
+        
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

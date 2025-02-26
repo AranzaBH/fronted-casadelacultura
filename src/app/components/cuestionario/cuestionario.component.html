@@ -1,0 +1,96 @@
+<div class="bootstrap-wrapper">
+  <div class="container mt-0 d-flex justify-content-center">
+  <div class="row" style="width: 100%; max-width: 1000px;">
+      
+   
+      <!-- Imagen como botón de regresar -->
+      <div class="col-md-4 text-left">
+          
+      </div>
+    
+        
+        <h2 class="text-center mb-9">Crear Cuestionario</h2>
+          
+        
+
+
+
+        
+        <!-- Datos generales del cuestionario -->
+        <div class="form-group mb-3">
+          <label for="nombreCuestionario" class="form-label">Nombre del Cuestionario:</label>
+          <input
+            id="nombreCuestionario"
+            type="text"
+            class="form-control"
+            [(ngModel)]="cuestionario.nombreCuestionario"
+            placeholder="Ej. Encuesta de satisfacción"
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="instruccion" class="form-label">Instrucciones:</label>
+          <textarea
+            id="instruccion"
+            class="form-control"
+            rows="3"
+            [(ngModel)]="cuestionario.instruccion"
+            placeholder="Ej. Por favor, responda todas las preguntas"
+          ></textarea>
+        </div>
+
+        <!-- Preguntas dinámicas -->
+        <div *ngFor="let pregunta of preguntas; let i = index" class="mt-4 border p-3 rounded-3 bg-light">
+          <h4 class="mb-3">Pregunta {{ i + 1 }}</h4>
+          <div class="form-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="pregunta.pregunta"
+              placeholder="Escribe tu pregunta aquí"
+            />
+          </div>
+
+          <!-- Respuestas dinámicas -->
+          <h5 class="mb-3">Respuestas:</h5>
+          <div *ngFor="let respuesta of pregunta.respuestas; let j = index" class="form-row align-items-center mb-3">
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="respuesta.respuesta"
+                placeholder="Escribe una respuesta aquí"
+              />
+            </div>
+            <div class="col-auto">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [(ngModel)]="respuesta.esCorrecta"
+              />
+              <label class="form-check-label">¿Correcta?</label>
+            </div>
+            <div class="col-auto">
+              <button type="button" class="btn btn-gris-danger" (click)="eliminarRespuesta(i, j)">Eliminar</button>
+            </div>
+          </div>
+
+          <!-- Botón para agregar respuesta -->
+          <button type="button" class="btn btn-gris" (click)="agregarRespuesta(i)">Agregar Respuesta</button>
+
+          <!-- Botón para eliminar pregunta -->
+          <button type="button" class="btn btn-gris-danger mt-2" (click)="eliminarPregunta(i)">Eliminar Pregunta</button>
+        </div>
+
+        <!-- Botón para agregar una nueva pregunta -->
+        <div class="mt-4 text-center">
+          <button type="button" class="btn btn-gris mt-3" (click)="agregarPregunta()">Agregar Pregunta</button>
+        </div>
+
+        <!-- Botón para guardar cuestionario -->
+        <div class="mt-4 text-center">
+          <button type="button" class="btn btn-gris" (click)="guardarCuestionario()">Guardar Cuestionario</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

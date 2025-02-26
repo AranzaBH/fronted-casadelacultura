@@ -1,0 +1,51 @@
+<div class="bootstrap-wrapper">
+  <div class="container" style="margin-top: 100px;"> <!-- Ajuste aquí el margen superior -->
+    <div class="row" style="margin-top: 20px;">
+      <div class="col-md-6 offset-md-3">
+        <div class="container">
+          <h2>Detalles de la Actividad</h2>
+        
+          <div *ngIf="actividad" class="actividad-container">
+            <mat-card class="actividad-card">
+              <mat-card-header>
+                <mat-card-title>{{ actividad.nombre }}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p><strong>Descripción:</strong> {{ actividad.descripcion }}</p>
+                <p><strong>Fecha:</strong> {{ actividad.fecha }}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          
+          <mat-card *ngIf="cuestionario">
+            <mat-card-header>
+              <mat-card-title>{{ cuestionario.nombreCuestionario }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p><strong>Instrucciones:</strong> {{ cuestionario.instruccion }}</p>
+              <p><strong>Fecha de Creación:</strong> {{ cuestionario.fechaCreacion | date:'medium' }}</p>
+          
+              <h3>Preguntas</h3>
+              <div *ngIf="cuestionario.preguntas.length > 0; else noPreguntas">
+                <mat-card *ngFor="let pregunta of cuestionario.preguntas" class="pregunta-card">
+                  <p><strong>{{ pregunta.pregunta }}</strong></p>
+                  <mat-radio-group (change)="seleccionarRespuesta(pregunta.idPregunta, $event.value)">
+                    <mat-radio-button *ngFor="let respuesta of pregunta.respuestas" [value]="respuesta.idRespuesta">
+                      {{ respuesta.respuesta }}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </mat-card>
+              </div>
+          
+              <ng-template #noPreguntas>
+                <p>No hay preguntas en este cuestionario.</p>
+              </ng-template>
+          
+              <button mat-raised-button color="primary" (click)="calcularPuntaje()">Calcular Puntaje</button>
+          
+              <div *ngIf="mostrarPuntaje">
+                <h3>Puntaje obtenido: {{ puntaje }} / {{ cuestionario.preguntas.length }}</h3>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          

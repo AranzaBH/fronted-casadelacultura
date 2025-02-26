@@ -1,0 +1,35 @@
+/* Botón personalizado */
+.btn-custom {
+    background-color:#efefefcd; /* Sin color de fondo */
+    color: inherit; /* Usa el color del texto heredado */
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Transición suave */
+  }
+  
+  .btn-custom:hover {
+    background-color: #9D2449; /* Cambia a guinda al pasar el cursor */
+    color: #ffffffe8; /* Cambia el color del texto a blanco */
+  }
+
+
+
+.btn-imagen {
+    background-color: white;
+    border-radius: 5px;
+    padding: 3px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-10px); /* Mueve el botón hacia arriba */
+    border: 1px solid #d3d3d3; /* Borde gris suave */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra sutil para un borde más suave */
+}
+
+.btn-imagen:hover {
+    background-color: #9D2449; /* Cambia a guinda al pasar el cursor */
+    border-color: #9D2449; /* Cambia el borde a guinda al pasar el cursor */
+}

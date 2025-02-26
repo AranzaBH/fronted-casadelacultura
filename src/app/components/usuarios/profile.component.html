@@ -1,0 +1,67 @@
+<div class="bootstrap-wrapper">
+  
+    <div class="row w-100" style="max-width: 900px;">
+      <!-- Tarjeta para la foto de perfil y nombre -->
+      <div class="col-12 col-md-4 mb-4">
+        <mat-card class="text-center shadow">
+          <mat-card-content>
+            <img
+              src="../../../../../assets/icon.png"
+              class="responsive-image rounded-circle mb-3"
+              alt="Foto de perfil"
+              style="width: 150px; height: 150px; object-fit: cover;"
+            />
+            <h3 class="mb-1">{{ user.nombre }} {{ user.apellidoPaterno }} {{ user.apellidoMaterno }}</h3>
+            <p class="text-muted">{{ user.authorities[0].authority }}</p>
+          </mat-card-content>
+          <mat-card-actions class="d-flex justify-content-center">
+            <button mat-raised-button color="primary" class="btn-edit-profile">Editar Perfil</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <!-- Tarjeta para los detalles del usuario -->
+      <div class="col-12 col-md-8">
+        <mat-card class="shadow">
+          <mat-card-header>
+            <mat-card-title>Detalles del Perfil</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="detail-item">
+              <span class="detail-label">Username:</span>
+              <span class="detail-value">{{ user.username }}</span>
+            </div>
+            <div class="details-list">
+              <div class="detail-item">
+                <span class="detail-label">Nombre:</span>
+                <span class="detail-value">{{ user.nombre }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Apellido Paterno:</span>
+                <span class="detail-value">{{ user.apellidoPaterno }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Apellido Materno:</span>
+                <span class="detail-value">{{ user.apellidoMaterno }}</span>
+              </div>
+              
+              
+              <div class="detail-item">
+                <span class="detail-label">Telefono:</span>
+                <span class="detail-value">{{ user.telefono  }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Estado:</span>
+                <span class="detail-value">{{ user.enabled ? "Activo" : "No activo" }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Rol:</span>
+                <span class="detail-value">{{ user.authorities[0].authority }}</span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+

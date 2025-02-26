@@ -1,0 +1,49 @@
+.cuestionario-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 3px solid #d2d2d2c9;
+    border-radius: 9px;
+    background-color: #f9f9f9e1;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
+
+
+  .btn-gris {
+    background-color: #d3d3d3; /* Gris suave */
+    color: #333; /* Color del texto */
+  }
+
+  .btn-gris:hover {
+    background-color: #9e1b32; /* Guinda */
+    color: white;
+  }
+
+  .btn-gris:focus {
+    background-color: #9e1b32; /* Guinda */
+    color: white;
+  }
+
+  .btn-gris-danger {
+    background-color: #f5c6cb; /* Gris claro para eliminar */
+    color: #721c24;
+  }
+
+  .btn-gris-danger:hover {
+    background-color: #9e1b32; /* Guinda */
+    color: white;
+  }

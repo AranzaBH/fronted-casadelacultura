@@ -1,0 +1,12 @@
+/* Centra el contenido de la página */
+.container {
+    text-align: center;
+  }
+  
+  /* Opcional: Espaciado entre la lista y los botones */
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
