@@ -25,12 +25,8 @@ import { VerActividadesUsuarioComponent } from './components/usuarios/ver-activi
 import { ActividadesComponent } from './components/actividades/actividades-component.component';
 import { ActividadesTallerComponent } from './components/actividades/actividades-taller.component';
 import { CrearActividadComponent } from './components/actividades/crear-actividad.component';
-<<<<<<< HEAD
 import { CuestionarioComponent } from './components/cuestionario/cuestionario.component';
-=======
-import { LibroFormComponent } from './components/obra-literaria/obra-literaria-form.component';
 import { LibroListComponent } from './components/obra-literaria/obra-literaria.component';
->>>>>>> 7ce411784a3d6ec8728cdba2de4e5abd5803af1e
 
 export const routes: Routes = [
  
