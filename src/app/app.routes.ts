@@ -18,6 +18,8 @@ import { VideoListComponent } from './components/video/video-list.component';
 import { AutorListComponent } from './components/autor/autor-list.component';
 import { UsuarioListComponent } from './components/usuarios/usuario-list.component';
 import { LoginComponent } from './components/login/login.component';
+import { LibroFormComponent } from './components/obra-literaria/obra-literaria-form.component';
+import { LibroListComponent } from './components/obra-literaria/obra-literaria.component';
 
 export const routes: Routes = [
  
@@ -28,6 +30,11 @@ export const routes: Routes = [
   {
     path:'categoria-libro',
     component:CategoriaLibroComponent
+  },
+
+  {
+    path:'libro',
+    component:LibroListComponent
   },
 
   {

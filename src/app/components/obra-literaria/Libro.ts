@@ -19,6 +19,6 @@ export class Libro{
   fechaCreacion?:Date;
   activo?:boolean;
 autores?:Autor[];
-imagenes?:string;
+imagenes?:string[];
 
 }

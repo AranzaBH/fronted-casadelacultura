@@ -25,6 +25,10 @@ export class CategoriaLibroService {
     this.registroEdita.next(categoriaLibro);
   }
 
+  listarTodas(): Observable<CategoriaLibro[]> {
+        return this.http.get<CategoriaLibro[]>(this.raiz+'/lista');
+      }
+
   getAll(params?: any) {
     const body = params || {};
     return this.http.post(this.raiz + '/list', body);

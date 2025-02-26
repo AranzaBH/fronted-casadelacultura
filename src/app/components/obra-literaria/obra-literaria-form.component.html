@@ -1,0 +1,405 @@
+<div class="form-wrapper">
+    <div *ngIf="message" 
+         class="alert-custom" 
+         [ngClass]="{'alert-success': messageType === 'success', 'alert-danger': messageType === 'error'}"
+         [@fadeSlide]>
+      <div class="alert-icon">
+        <i [class]="messageType === 'success' ? 'pi pi-check-circle' : 'pi pi-exclamation-circle'"></i>
+      </div>
+      <span class="alert-message">{{ message }}</span>
+    </div>
+  
+    <form #formulario="ngForm" (ngSubmit)="save()" class="form-container">
+      <div class="form-header">
+        <div class="form-title-decoration"></div>
+        <h2 class="form-title">
+        </h2>
+        <div class="form-title-decoration"></div>
+      </div>
+  
+      <div class="form-body">
+        <!-- Información básica -->
+        <div class="form-section">
+          <h3 class="section-title">Información Básica</h3>
+          
+          <div class="form-group">
+            <label for="titulo" class="form-label">
+              <i class="pi pi-book"></i>
+              <span>Título</span>
+            </label>
+            <div class="input-container">
+              <input
+                type="text"
+                id="titulo"
+                name="titulo"
+                [(ngModel)]="libro.titulo"
+                class="form-control"
+                placeholder="Ingrese el título del libro"
+                required
+                #titulo="ngModel"
+              />
+              <span class="focus-border"><i></i></span>
+            </div>
+            <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="error-message">
+              <i class="pi pi-exclamation-circle"></i>
+              El título es requerido
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="descripcion" class="form-label">
+              <i class="pi pi-align-left"></i>
+              <span>Descripción</span>
+            </label>
+            <div class="input-container">
+              <textarea
+                id="descripcion"
+                name="descripcion"
+                [(ngModel)]="libro.descripcion"
+                class="form-control"
+                rows="4"
+                placeholder="Ingrese la descripción del libro"
+                required
+                #descripcion="ngModel"
+              ></textarea>
+              <span class="focus-border"><i></i></span>
+            </div>
+            <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="error-message">
+              <i class="pi pi-exclamation-circle"></i>
+              La descripción es requerida
+            </div>
+          </div>
+        </div>
+  
+        <!-- Detalles del libro -->
+        <div class="form-section">
+          <h3 class="section-title">Detalles del Libro</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="isbn" class="form-label">
+                <i class="pi pi-id-card"></i>
+                <span>ISBN</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="isbn"
+                  name="isbn"
+                  [(ngModel)]="libro.isbn"
+                  class="form-control"
+                  placeholder="Ingrese el ISBN"
+                  required
+                  #isbn="ngModel"
+                />
+                <span class="focus-border"><i></i></span>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="editorial" class="form-label">
+                <i class="pi pi-building"></i>
+                <span>Editorial</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="editorial"
+                  name="editorial"
+                  [(ngModel)]="libro.editorial"
+                  class="form-control"
+                  placeholder="Ingrese la editorial"
+                  required
+                  #editorial="ngModel"
+                />
+                <span class="focus-border"><i></i></span>
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-row">
+            <div class="form-group">
+              <label for="edicion" class="form-label">
+                <i class="pi pi-sort-numeric-up"></i>
+                <span>Edición</span>
+              </label>
+              <div class="input-container">
+                <p-inputNumber
+                  id="edicion"
+                  name="edicion"
+                  [(ngModel)]="libro.edicion"
+                  [showButtons]="false"
+                  placeholder="Número de edición"
+                  [min]="1"
+                ></p-inputNumber>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="anio" class="form-label">
+                <i class="pi pi-calendar"></i>
+                <span>Año</span>
+              </label>
+              <div class="input-container">
+                <p-inputNumber
+                  id="anio"
+                  name="anio"
+                  [(ngModel)]="libro.anio"
+                  [showButtons]="false"
+                  placeholder="Año de publicación"
+                  [min]="1800"
+                  [max]="2025"
+                ></p-inputNumber>
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-row">
+            <div class="form-group">
+              <label for="numeroPaginas" class="form-label">
+                <i class="pi pi-file"></i>
+                <span>Número de Páginas</span>
+              </label>
+              <div class="input-container">
+                <p-inputNumber
+                  id="numeroPaginas"
+                  name="numeroPaginas"
+                  [(ngModel)]="libro.numeroPaginas"
+                  [showButtons]="false"
+                  placeholder="Número de páginas"
+                  [min]="1"
+                ></p-inputNumber>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="cantidadEjemplares" class="form-label">
+                <i class="pi pi-copy"></i>
+                <span>Cantidad de Ejemplares</span>
+              </label>
+              <div class="input-container">
+                <p-inputNumber
+                  id="cantidadEjemplares"
+                  name="cantidadEjemplares"
+                  [(ngModel)]="libro.cantidadEjemplares"
+                  [showButtons]="false"
+                  placeholder="Cantidad de ejemplares"
+                  [min]="0"
+                ></p-inputNumber>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Clasificación y Categoría -->
+        <div class="form-section">
+          <h3 class="section-title">Clasificación y Categoría</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="idioma" class="form-label">
+                <i class="pi pi-globe"></i>
+                <span>Idioma</span>
+              </label>
+              <div class="input-container select-container">
+                <select
+                  id="idioma"
+                  name="idioma"
+                  [(ngModel)]="libro.idioma"
+                  class="form-control custom-select"
+                  required
+                  #idioma="ngModel"
+                >
+                  <option value="" disabled selected>Seleccione un idioma</option>
+                  <option *ngFor="let idioma of idiomas" [value]="idioma">
+                    {{ idioma }}
+                  </option>
+                </select>
+                <span class="select-arrow">
+                  <i class="pi pi-chevron-down"></i>
+                </span>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="categoria" class="form-label">
+                <i class="pi pi-tags"></i>
+                <span>Categoría</span>
+              </label>
+              <div class="input-container select-container">
+                <select
+                  id="categoria"
+                  name="categoria"
+                  [(ngModel)]="libro.categoria"
+                  class="form-control custom-select"
+                  required
+                  #categoria="ngModel"
+                >
+                  <option value="" disabled selected>Seleccione una categoría</option>
+                  <option *ngFor="let cat of categorias" [ngValue]="cat">
+                    {{ cat.nombre }}
+                  </option>
+                </select>
+                <span class="select-arrow">
+                  <i class="pi pi-chevron-down"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="clasificacion" class="form-label">
+              <i class="pi pi-filter"></i>
+              <span>Clasificación</span>
+            </label>
+            <div class="input-container">
+              <input
+                type="text"
+                id="clasificacion"
+                name="clasificacion"
+                [(ngModel)]="libro.clasificacion"
+                class="form-control"
+                placeholder="Ingrese la clasificación"
+                required
+                #clasificacion="ngModel"
+              />
+              <span class="focus-border"><i></i></span>
+            </div>
+          </div>
+        </div>
+  
+       <!-- Reemplaza la sección de autores existente con esto -->
+<div class="form-section authors-section">
+  <h3 class="section-title">
+    <i class="pi pi-users"></i>
+    Autores del Libro
+  </h3>
+  
+  <div class="form-group">
+    <div class="authors-container">
+      <p-multiSelect
+        [options]="autores"
+        [(ngModel)]="selectedAutores"
+        [ngModelOptions]="{standalone: true}"
+        optionLabel="nombre"
+        placeholder="Buscar y seleccionar autores"
+        [filter]="true"
+        filterBy="nombre,apellidoPaterno,apellidoMaterno"
+        [showToggleAll]="true"
+        styleClass="authors-multiselect"
+        [panelStyle]="{minWidth: '100%'}"
+      >
+        <ng-template pTemplate="header">
+          <div class="multiselect-header">
+            <span class="selected-count">
+              {{ selectedAutores.length }} autor(es) seleccionado(s)
+            </span>
+          </div>
+        </ng-template>
+        
+        <ng-template let-autor pTemplate="item">
+          <div class="author-item">
+            <div class="author-avatar">
+              <i class="pi pi-user"></i>
+            </div>
+            <div class="author-info">
+              <span class="author-name">
+                {{ autor.nombre }} {{ autor.apellidoPaterno }} {{ autor.apellidoMaterno }}
+              </span>
+              <span class="author-type">{{ autor.tipoAutor }}</span>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template let-autor pTemplate="selectedItem">
+          <div class="selected-author">
+            <i class="pi pi-user"></i>
+            <span>{{ autor.nombre }} {{ autor.apellidoPaterno }}</span>
+          </div>
+        </ng-template>
+      </p-multiSelect>
+    </div>
+
+    <div class="selected-authors-preview" *ngIf="selectedAutores.length > 0">
+      <div class="selected-authors-grid">
+        <div class="author-card" *ngFor="let autor of selectedAutores">
+          <div class="author-card-avatar">
+            <i class="pi pi-user"></i>
+          </div>
+          <div class="author-card-info">
+            <h4>{{ autor.nombre }} {{ autor.apellidoPaterno }}</h4>
+            <span>{{ autor.tipoAutor }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+        <!-- Imágenes -->
+        <div class="form-section">
+          <h3 class="section-title">Imágenes</h3>
+          
+          <div class="form-group">
+            <p-fileUpload
+              #fileUpload
+              mode="advanced"
+              [multiple]="true"
+              accept="image/*"
+              [maxFileSize]="1000000"
+              [showUploadButton]="false"
+              [showCancelButton]="false"
+              (onSelect)="onFileSelect($event)"
+              chooseLabel="Seleccionar Imágenes"
+              invalidFileSizeMessageSummary="Tamaño de archivo inválido"
+              invalidFileSizeMessageDetail="El tamaño máximo permitido es 1MB"
+              styleClass="custom-upload"
+            >
+              <ng-template pTemplate="content">
+                <div class="image-preview-container" *ngIf="previewImages.length > 0">
+                  <div class="image-preview" *ngFor="let preview of previewImages; let i = index">
+                    <img [src]="preview" alt="Preview">
+                    <button type="button" class="remove-image" (click)="removeImage(i)">
+                      <i class="pi pi-times"></i>
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+            </p-fileUpload>
+          </div>
+        </div>
+  
+        <!-- Observaciones -->
+        <div class="form-section">
+          <h3 class="section-title">Observaciones</h3>
+          
+          <div class="form-group">
+            <div class="input-container">
+              <textarea
+                id="observacion"
+                name="observacion"
+                [(ngModel)]="libro.observacion"
+                class="form-control"
+                rows="4"
+                placeholder="Ingrese observaciones adicionales"
+              ></textarea>
+              <span class="focus-border"><i></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-footer">
+        <button type="submit" 
+                class="btn-submit" 
+                [disabled]="formulario.invalid"
+                [class.disabled]="formulario.invalid">
+          <span class="button-content">
+            <i class="pi pi-save"></i>
+            <span>Guardar Libro</span>
+          </span>
+          <span class="button-effect"></span>
+        </button>
+      </div>
+    </form>
+  </div>
