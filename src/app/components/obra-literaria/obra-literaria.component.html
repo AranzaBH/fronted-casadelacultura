@@ -1,0 +1,170 @@
+<div class="bootstrap-wrapper">
+    <div class="container" style="margin-top: 0px;">
+      <div class="container mt-5">
+        <p-card styleClass="crema-card">
+          <div class="row mb-4 align-items-center">
+            <div class="row mt-5 mb-4 justify-content-center">
+              <div class="col-12 text-center">
+                <h1 class="display-4 fw-bold text-primary">Libros</h1>
+              </div>
+            </div>
+  
+            <div *ngIf="message" [ngClass]="{'alert-success': messageType === 'success', 'alert-danger': messageType === 'error'}" class="alert mt-3">
+              {{ message }}
+            </div>
+  
+            <div class="col-12 col-md-8">
+              <div class="input-group">
+                <input
+                  #search
+                  type="text"
+                  [(ngModel)]="params.filtro"
+                  (ngModelChange)="onSearch()"
+                  placeholder="Buscar por nombre o apellido paterno"
+                  class="form-control form-control-lg border-0 shadow-sm flex-grow-1"
+                />
+               
+                <div class="input-group-append">
+                  <button (click)="abrirForm()" class="btn btn-lg btn-primary px-5 shadow-sm">
+                    <i class="pi pi-plus"></i> Agregar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Tabla -->
+          <div class="table-responsive">
+            <!-- <p-table
+              #tablaB
+              [value]="listaLibro"
+              [paginator]="true"
+              [rows]="10"
+              [totalRecords]="params.total"
+              [lazy]="true"
+              (onLazyLoad)="mPaginacion($event)"
+              [first]="params.offset"
+              [loading]="!listaLibro.length"
+              [rows]="5"
+              [rowsPerPageOptions]="[5,10,20,50,100]"
+              sortMode="multiple"
+              [responsive]="true"
+              class="custom-table"
+            >
+              <ng-template pTemplate="header">
+                <tr class="bg-light text-center">
+                  <th>Nombre</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Tipo</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-autor>
+                <tr>
+                  <td>{{ autor.nombre }}</td>
+                  <td>{{ autor.apellidoPaterno}}</td>
+                  <td>{{ autor.apellidoMaterno}}</td>
+                  <td>{{ autor.tipoAutor}}</td>
+                  <td>{{ autor.activo? 'activo':'inactivo' }}</td>
+                  <td class="text-center">
+                    <button
+                      (click)="editar(autor)"
+                      class="btn btn-info btn-sm"
+                      title="Editar"
+                    >
+                      <i class="pi pi-pencil"></i> Editar
+                    </button>
+                    <button
+                      (click)="confirmDelete(autor)"
+                      class="btn btn-danger btn-sm"
+                      title="Eliminar"
+                    >
+                      <i class="pi pi-trash"></i> Eliminar
+                    </button>
+                  </td>
+                </tr>
+              </ng-template>
+  
+              <ng-template pTemplate="paginator">
+                <div class="pagination-container">
+                  <p-paginator
+                    [rows]="10"
+                    [totalRecords]="params.total"
+                    [first]="params.offset"
+                    (onPageChange)="mPaginacion($event)"
+                    [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[10, 20, 50]"
+                    class="p-jc-center"
+                  ></p-paginator>
+                </div>
+              </ng-template>
+            </p-table> -->
+          </div>
+        </p-card>
+      </div>
+    </div>
+  </div>
+  
+  <p-dialog
+    [(visible)]="libroDialog"
+    [modal]="true"
+    [closable]="true"
+    [responsive]="true"
+    [style]="{ width: '50vw' }"
+  >
+    <app-libro-form
+      [libro]="selectLibro"
+      (libroChange)="cerrarForm()"
+    ></app-libro-form>
+  </p-dialog>
+  
+  <p-dialog
+    [(visible)]="deleteDialog"
+    [modal]="true"
+    [closable]="false"
+    [contentStyle]="{
+      'background-color': '#ffffff',
+      'padding': '2rem',
+      'border-radius': '12px'
+    }"
+    [style]="{
+      'width': '400px',
+      'max-width': '90vw',
+      'box-shadow': '0 8px 30px rgba(0,0,0,0.12)',
+      'border-radius': '12px'
+    }"
+    styleClass="custom-delete-dialog"
+  >
+    <div class="dialog-content">
+      <div class="warning-icon">
+        <i class="pi pi-exclamation-triangle"></i>
+      </div>
+      
+      <p class="confirmation-message">
+        ¿Está seguro de que desea eliminar el libro
+        <strong class="highlighted-text">{{ selectLibro?.titulo}}</strong>?
+      </p>
+      
+      <p class="warning-text">Esta acción no se puede deshacer.</p>
+    </div>
+  
+    <div class="dialog-footer">
+      <button 
+        (click)="deleteDialog = false"
+        class="cancel-btn"
+      >
+        <i class="pi pi-times"></i>
+        Cancelar
+      </button>
+      
+      <button 
+        (click)="delete()"
+        class="delete-btn"
+      >
+        <i class="pi pi-trash"></i>
+        Eliminar
+      </button>
+    </div>
+  </p-dialog>

@@ -16,6 +16,10 @@ export class AutorService {
       return this.http.get<Autor[]>(this.raiz);
     }
 
+    listarLiteraria(): Observable<Autor[]> {
+      return this.http.get<Autor[]>(this.raiz+'/literarias');
+    }
+
     // Obtener una categoría de obra por ID
     obtenerAutorPorId(id: number): Observable<Autor> {
       return this.http.get<Autor>(`${this.raiz}/${id}`);
