@@ -16,6 +16,7 @@ import { Libro } from './Libro';
 import { Autor } from '../autor/Autor';
 import { CategoriaLibro } from '../categoria-libro/CategoriaLibro';
 import { LibroService } from './obra-literaria.service';
+import { ImagenesLiterariasService} from './imagenes-literarias.service';
 
 @Component({
   selector: 'app-libro-form',
@@ -53,6 +54,7 @@ export class LibroFormComponent implements OnInit {
   message: string = '';
   messageType: 'success' | 'error' | '' = '';
   _libro!: Libro;
+  selectedFile:any;
   autores: Autor[] = [];
   categorias: CategoriaLibro[] = [];
   selectedAutores: Autor[] = [];
@@ -104,32 +106,30 @@ export class LibroFormComponent implements OnInit {
     });
   }
 
+
   onFileSelect(event: any) {
-    const files = event.files;
-    this.uploadedFiles = [...this.uploadedFiles, ...files];
-    
-    for (let file of files) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.previewImages.push(e.target.result);
+        this.previewImages = [e.target.result];
       };
       reader.readAsDataURL(file);
     }
   }
-
+  
   removeImage(index: number) {
     this.previewImages.splice(index, 1);
     this.uploadedFiles.splice(index, 1);
   }
 
   async save() {
-    if (this.uploadedFiles.length > 0) {
-      const imageUrls = await this.uploadImages();
-      this._libro.imagenes = imageUrls
-    }
+    
 
     this._libro.autores = this.selectedAutores;
-
+console.log("envio esto",this._libro)
     if (this._libro.id) {
       this.update();
     } else {
@@ -137,38 +137,41 @@ export class LibroFormComponent implements OnInit {
     }
   }
 
-  async uploadImages(): Promise<string[]> {
-    return new Promise((resolve) => {
-      const urls = this.uploadedFiles.map((file, index) => 
-        `http://tu-servidor.com/images/${file.name}`
-      );
-      resolve(urls);
-    });
-  }
+  
 
   create() {
-    this.libroService.crearLibro(this._libro).subscribe({
+    const formData = new FormData();
+  
+    formData.append("libro", JSON.stringify(this._libro));
+  
+    if (this.selectedFile) {
+      formData.append("archivo", this.selectedFile);
+    }
+  
+    this.libroService.crearLibro(formData).subscribe({
       next: (data: any) => {
         if (data.success) {
-          this.message = 'Libro guardado exitosamente';
-          this.messageType = 'success';
-          
+          this.message = "Libro guardado exitosamente";
+          this.messageType = "success";
+  
           setTimeout(() => {
             this.libroChange.emit(this._libro);
-            this.message = '';
-            this.messageType = '';
+            this.message = "";
+            this.messageType = "";
           }, 1500);
         } else {
-          this.message = data.message || 'Hubo un problema al guardar el libro.';
-          this.messageType = 'error';
+          this.message = data.message || "Hubo un problema al guardar el libro.";
+          this.messageType = "error";
         }
       },
       error: () => {
-        this.message = 'Hubo un problema al comunicar con el servidor.';
-        this.messageType = 'error';
+        this.message = "Hubo un problema al comunicar con el servidor.";
+        this.messageType = "error";
       }
     });
   }
+
+ 
 
   update() {
     this.libroService.update(this._libro).subscribe({

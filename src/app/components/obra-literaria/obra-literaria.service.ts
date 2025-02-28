@@ -22,9 +22,10 @@ export class LibroService {
   }
 
   // Crear un nuevo taller
-  crearLibro(libro: Libro): Observable<Libro> {
-    return this.http.post<Libro>(this.apiUrl, libro, { headers: this.headers });
+  crearLibro(libro: FormData) {
+    return this.http.post(`${this.apiUrl}/crear`, libro);
   }
+  
 
   // Actualizar un taller existente
   actualizarLibro(id: number, libro: Libro): Observable<Libro> {

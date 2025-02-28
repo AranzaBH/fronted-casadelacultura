@@ -14,11 +14,12 @@ export class Libro{
   anio?:number;
   idioma?:string;
   clasificacion?:string;
-  categoria?:CategoriaLibro;
-  observacion?:string;
+  categoriaLibro?:CategoriaLibro;
+  observaciones?:string;
   fechaCreacion?:Date;
   activo?:boolean;
 autores?:Autor[];
 imagenes?:string[];
+urlImagenPortada?:string;
 
 }

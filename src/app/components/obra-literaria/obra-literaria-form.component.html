@@ -230,7 +230,7 @@
                 <select
                   id="categoria"
                   name="categoria"
-                  [(ngModel)]="libro.categoria"
+                  [(ngModel)]="libro.categoriaLibro"
                   class="form-control custom-select"
                   required
                   #categoria="ngModel"
@@ -341,31 +341,9 @@
           <h3 class="section-title">Imágenes</h3>
           
           <div class="form-group">
-            <p-fileUpload
-              #fileUpload
-              mode="advanced"
-              [multiple]="true"
-              accept="image/*"
-              [maxFileSize]="1000000"
-              [showUploadButton]="false"
-              [showCancelButton]="false"
-              (onSelect)="onFileSelect($event)"
-              chooseLabel="Seleccionar Imágenes"
-              invalidFileSizeMessageSummary="Tamaño de archivo inválido"
-              invalidFileSizeMessageDetail="El tamaño máximo permitido es 1MB"
-              styleClass="custom-upload"
-            >
-              <ng-template pTemplate="content">
-                <div class="image-preview-container" *ngIf="previewImages.length > 0">
-                  <div class="image-preview" *ngFor="let preview of previewImages; let i = index">
-                    <img [src]="preview" alt="Preview">
-                    <button type="button" class="remove-image" (click)="removeImage(i)">
-                      <i class="pi pi-times"></i>
-                    </button>
-                  </div>
-                </div>
-              </ng-template>
-            </p-fileUpload>
+            <input type="file" (change)="onFileSelect($event)" />
+<img *ngIf="previewImages.length" [src]="previewImages[0]" alt="Vista previa" />
+             
           </div>
         </div>
   
@@ -378,7 +356,7 @@
               <textarea
                 id="observacion"
                 name="observacion"
-                [(ngModel)]="libro.observacion"
+                [(ngModel)]="libro.observaciones"
                 class="form-control"
                 rows="4"
                 placeholder="Ingrese observaciones adicionales"
