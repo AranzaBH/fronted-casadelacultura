@@ -41,10 +41,9 @@ export class ObraPictoricaService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  update(id?: number, formData?: FormData) {
-    return this.http.put(`${this.apiUrl}/actualizar/${id}`, formData);
+  update(idObra?: number, formData?: FormData) {
+    return this.http.put(`${this.apiUrl}/actualizar/${idObra}`, formData);
   }
-
 
   // Desactivar un taller por ID
   desactivarObra(id: number): Observable<void> {

@@ -88,6 +88,7 @@ export class ObraPictoricaFormComponent implements OnInit {
     }
     this.selectedAutores= [];
     this.selectedFile = null;
+    this.previewImages=[];
     this._obra.urlImagenPortada = '';
   }
   
@@ -174,11 +175,13 @@ export class ObraPictoricaFormComponent implements OnInit {
 
   update() {
     const formData = new FormData();
-    formData.append("libro", JSON.stringify(this._obra));
+    formData.append("obra", JSON.stringify(this._obra));
   
     if (this.selectedFile) {
       formData.append("archivo", this.selectedFile);
     }
+
+    console.log("obra a",formData)
   
     this.obraService.update(this._obra.id, formData).subscribe({
       next: (data: any) => {

@@ -1,0 +1,134 @@
+<div class="book-detail-container">
+    <div class="book-header">
+      <div class="book-title-section">
+        <h1 class="book-title">{{ _obra.titulo }}</h1>
+        <div class="book-category" *ngIf="_obra.tituloOriginal">
+            <span class="category-badge">Titulo Original:{{ _obra.tituloOriginal }}</span>
+          </div>
+        <div class="book-category" *ngIf="_obra.categoriaObra">
+          <span class="category-badge">Categoria:{{ _obra.categoriaObra.nombre }}</span>
+        </div>
+      </div>
+      <div class="book-actions">
+        <button class="action-button back-button" (click)="goBack()">
+          <i class="pi pi-arrow-left"></i>
+          <span>Volver</span>
+        </button>
+      </div>
+    </div>
+  
+    <div class="book-content">
+      <!-- Columna izquierda: Portada y detalles básicos -->
+      <div class="book-cover-column">
+        <div class="book-cover-wrapper">
+          <div class="book-cover-frame" *ngIf="_obra.urlImagenPortada">
+            <img 
+              [src]="_obra.urlImagenPortada" 
+              alt="Portada del libro" 
+              class="book-cover-image"
+              (click)="openImagePreview(_obra.urlImagenPortada)"
+            />
+            <div class="cover-overlay">
+              <button 
+                type="button" 
+                class="image-action-button zoom" 
+                (click)="openImagePreview(_obra.urlImagenPortada)"
+                title="Ver imagen"
+              >
+                <i class="pi pi-search-plus"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="no-image-placeholder" *ngIf="!_obra.urlImagenPortada">
+            <div class="no-image-icon">
+              <i class="pi pi-image"></i>
+            </div>
+            <div class="no-image-text">
+              No hay portada disponible
+            </div>
+          </div>
+        </div>
+  
+        <div class="book-basic-info">
+          <div class="info-item" >
+            <div class="info-label"><i class="pi pi-id-card"></i> Codigo:</div>
+            <div class="info-value">{{ _obra.codigo || 'No disponible' }}</div>
+          </div>
+          <div class="info-item" *ngIf="_obra.tecnica">
+            <div class="info-label"><i class="pi pi-sort-numeric-up"></i> Tecnica:</div>
+            <div class="info-value">{{ _obra.tecnica.nombre || 'No disponible' }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label"><i class="pi pi-calendar"></i> Año:</div>
+            <div class="info-value">{{ _obra.anioObra || 'No disponible' }}</div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+            <h2 class="section-title">
+              <i class="pi pi-book"></i>
+              Detalles
+            </h2>
+            <div class="section-content">
+              <div class="details-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Dimensión:</div>
+                  <div class="detail-value">{{ _obra.dimension || 'No disponible' }}</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Localización:</div>
+                  <div class="detail-value">{{ _obra.localizacion || 'No disponible' }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  
+      <!-- Columna derecha: Información detallada -->
+      <div class="book-details-column">
+        <div class="detail-section">
+          <h2 class="section-title">
+            <i class="pi pi-align-left"></i>
+            Descripción
+          </h2>
+          <div class="section-content description-content">
+            <p>{{ _obra.descripcion || 'No hay descripción disponible para este libro.' }}</p>
+          </div>
+        </div>
+
+  
+        <div class="detail-section">
+          <h2 class="section-title">
+            <i class="pi pi-users"></i>
+            Autores
+          </h2>
+          <div class="section-content">
+            <div *ngIf="selectedAutores && selectedAutores.length > 0" class="authors-grid">
+              <div class="author-card" *ngFor="let autor of selectedAutores">
+                <div class="author-avatar">
+                  <i class="pi pi-user"></i>
+                </div>
+                <div class="author-info">
+                  <h3 class="author-name">{{ autor.nombre }} {{ autor.apellidoPaterno }} {{ autor.apellidoMaterno }}</h3>
+                  <span class="author-type">{{ autor.tipoAutor }}</span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!selectedAutores || selectedAutores.length === 0" class="no-authors">
+              <i class="pi pi-info-circle"></i>
+              <span>No hay autores registrados para este libro</span>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  <div class="image-preview-modal" [class.active]="previewModalActive">
+    <img [src]="previewModalSrc" alt="Vista previa" class="modal-image" *ngIf="previewModalSrc">
+    <div class="modal-close" (click)="closeImagePreview()">
+      <i class="pi pi-times"></i>
+    </div>
+  </div>
