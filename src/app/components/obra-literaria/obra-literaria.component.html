@@ -20,7 +20,7 @@
                   type="text"
                   [(ngModel)]="params.filtro"
                   (ngModelChange)="onSearch()"
-                  placeholder="Buscar por nombre o apellido paterno"
+                  placeholder="Buscar por título"
                   class="form-control form-control-lg border-0 shadow-sm flex-grow-1"
                 />
                
@@ -35,7 +35,7 @@
   
           <!-- Tabla -->
           <div class="table-responsive">
-            <!-- <p-table
+             <p-table
               #tablaB
               [value]="listaLibro"
               [paginator]="true"
@@ -53,35 +53,32 @@
             >
               <ng-template pTemplate="header">
                 <tr class="bg-light text-center">
-                  <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>Tipo</th>
+                  <th>Titulo</th>
+                    <th>Categoria</th>
+                    <th>Clasificacion</th>
+                    <th>Descripcion</th>
+                    <th>Idioma</th>
                     <th>Estatus</th>
                     <th>Acciones</th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-autor>
+              <ng-template pTemplate="body" let-libro>
                 <tr>
-                  <td>{{ autor.nombre }}</td>
-                  <td>{{ autor.apellidoPaterno}}</td>
-                  <td>{{ autor.apellidoMaterno}}</td>
-                  <td>{{ autor.tipoAutor}}</td>
-                  <td>{{ autor.activo? 'activo':'inactivo' }}</td>
+                  <td>{{ libro.titulo }}</td>
+                  <td>{{ libro.categoriaLibro}}</td>
+                  <td>{{ libro.clasificacion}}</td>
+                  <td>{{ libro.descripcion}}</td>
+                  <td>{{ libro.idioma}}</td>
+                  <td>{{ libro.activo? 'activo':'inactivo' }}</td>
                   <td class="text-center">
-                    <button
-                      (click)="editar(autor)"
-                      class="btn btn-info btn-sm"
-                      title="Editar"
-                    >
-                      <i class="pi pi-pencil"></i> Editar
-                    </button>
-                    <button
-                      (click)="confirmDelete(autor)"
-                      class="btn btn-danger btn-sm"
-                      title="Eliminar"
-                    >
-                      <i class="pi pi-trash"></i> Eliminar
+                    <p-menu #menu [model]="obtenerOpciones(libro)" [popup]="true" appendTo="body"></p-menu>
+                    <button 
+                        type="button"
+                        class="options-button"
+                        (click)="menu.toggle($event)">
+                        <span class="button-effect"></span>
+                        <i class="pi pi-ellipsis-v"></i>
+                        <span>Opciones</span>
                     </button>
                   </td>
                 </tr>
@@ -100,7 +97,7 @@
                   ></p-paginator>
                 </div>
               </ng-template>
-            </p-table> -->
+            </p-table> 
           </div>
         </p-card>
       </div>

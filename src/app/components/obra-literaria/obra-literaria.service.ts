@@ -53,6 +53,6 @@ export class LibroService {
   }
 
   delete(id: number) {
-    return this.http.delete(this.apiUrl + '/desactivar/' + id);
+    return this.http.delete(this.apiUrl + '/' + id);
   }
 }

@@ -10,11 +10,14 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { LibroFormComponent } from './obra-literaria-form.component';
 import { Libro } from './Libro';
+import { SplitButtonModule } from 'primeng/splitbutton';
 import { LibroService } from './obra-literaria.service';
+import { MenuItem } from 'primeng/api';
+import { MenuModule } from 'primeng/menu';
 @Component({
   selector: 'app-libro-list',
   templateUrl: './obra-literaria.component.html',
-  styleUrls:['./obra-literaria-form.component.css'],
+  styleUrls:['./obra-literaria.component.css'],
   standalone: true,
   imports: [
     CommonModule,
@@ -24,7 +27,9 @@ import { LibroService } from './obra-literaria.service';
     DialogModule,
     ButtonModule,
     LibroFormComponent,
-    CardModule
+    CardModule,
+    SplitButtonModule,
+    MenuModule 
   ]
 })
 
@@ -39,6 +44,7 @@ export class LibroListComponent implements OnInit {
   message: string = '';
   messageType: 'success' | 'error' | '' = '';
   @ViewChild('tablaB') tablaB: any;
+  menuOpciones: any[] = []; 
 
 
   constructor(private libroService:LibroService,private location: Location) {
@@ -64,11 +70,40 @@ export class LibroListComponent implements OnInit {
     })
     this.obtenerDatosTabla()
 
+    
+
    }
 
    onSearch(){
     this.searchSubject.next(this.params.filtro);
    }
+
+   obtenerOpciones(libro: any): MenuItem[] {
+    return [
+      { 
+        label: 'Ver datos', 
+        icon: 'pi pi-pencil', 
+        command: () => this.editar(libro) 
+      },
+
+      { 
+        label: 'Ver imagenes', 
+        icon: 'pi pi-pencil', 
+        command: () => this.editar(libro) 
+      },
+      { 
+        label: 'Editar', 
+        icon: 'pi pi-pencil', 
+        command: () => this.editar(libro) 
+      },
+      { 
+        label: 'Eliminar', 
+        icon: 'pi pi-trash', 
+        command: () => this.confirmDelete(libro) 
+      }
+    ];
+  }
+  
 
    cerrarForm() {
     this.libroDialog = false;
