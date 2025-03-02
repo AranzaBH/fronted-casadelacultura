@@ -14,6 +14,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { LibroService } from './obra-literaria.service';
 import { MenuItem } from 'primeng/api';
 import { MenuModule } from 'primeng/menu';
+import { ObraLiterariaShowComponent } from './obra-literaria-show.component';
 @Component({
   selector: 'app-libro-list',
   templateUrl: './obra-literaria.component.html',
@@ -27,6 +28,7 @@ import { MenuModule } from 'primeng/menu';
     DialogModule,
     ButtonModule,
     LibroFormComponent,
+    ObraLiterariaShowComponent,
     CardModule,
     SplitButtonModule,
     MenuModule 
@@ -41,6 +43,7 @@ export class LibroListComponent implements OnInit {
   private searchSubject: Subject<string> = new Subject<string>();
   debounceTime=2000
   libroDialog = false;
+  libroDialogShow = false;
   message: string = '';
   messageType: 'success' | 'error' | '' = '';
   @ViewChild('tablaB') tablaB: any;
@@ -57,10 +60,22 @@ export class LibroListComponent implements OnInit {
       this.selectLibro = libro;
     }
 
+    mostrar(libro: Libro): void {
+      this.abrirShow();
+      this.selectLibro = libro;
+    }
+
+
   abrirForm() {
     this.selectLibro = new Libro();
     this.libroDialog = true;
   }
+
+  abrirShow() {
+    this.libroDialogShow = true;
+  }
+
+
 
   ngOnInit() {
     this.searchSubject.pipe(
@@ -82,13 +97,13 @@ export class LibroListComponent implements OnInit {
     return [
       { 
         label: 'Ver datos', 
-        icon: 'pi pi-pencil', 
-        command: () => this.editar(libro) 
+        icon: 'pi pi-eye', 
+        command: () => this.mostrar(libro) 
       },
 
       { 
         label: 'Ver imagenes', 
-        icon: 'pi pi-pencil', 
+        icon: 'pi pi-eye', 
         command: () => this.editar(libro) 
       },
       { 

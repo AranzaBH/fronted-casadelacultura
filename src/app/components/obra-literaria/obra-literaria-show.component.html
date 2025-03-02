@@ -1,0 +1,152 @@
+<div class="book-detail-container">
+    <div class="book-header">
+      <div class="book-title-section">
+        <h1 class="book-title">{{ _libro.titulo }}</h1>
+        <div class="book-category" *ngIf="_libro.categoriaLibro">
+          <span class="category-badge">{{ _libro.categoriaLibro.nombre }}</span>
+        </div>
+      </div>
+      <div class="book-actions">
+        <button class="action-button back-button" (click)="goBack()">
+          <i class="pi pi-arrow-left"></i>
+          <span>Volver</span>
+        </button>
+      </div>
+    </div>
+  
+    <div class="book-content">
+      <!-- Columna izquierda: Portada y detalles básicos -->
+      <div class="book-cover-column">
+        <div class="book-cover-wrapper">
+          <div class="book-cover-frame" *ngIf="_libro.urlImagenPortada">
+            <img 
+              [src]="_libro.urlImagenPortada" 
+              alt="Portada del libro" 
+              class="book-cover-image"
+              (click)="openImagePreview(_libro.urlImagenPortada)"
+            />
+            <div class="cover-overlay">
+              <button 
+                type="button" 
+                class="image-action-button zoom" 
+                (click)="openImagePreview(_libro.urlImagenPortada)"
+                title="Ver imagen"
+              >
+                <i class="pi pi-search-plus"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="no-image-placeholder" *ngIf="!_libro.urlImagenPortada">
+            <div class="no-image-icon">
+              <i class="pi pi-image"></i>
+            </div>
+            <div class="no-image-text">
+              No hay portada disponible
+            </div>
+          </div>
+        </div>
+  
+        <div class="book-basic-info">
+          <div class="info-item">
+            <div class="info-label"><i class="pi pi-id-card"></i> ISBN:</div>
+            <div class="info-value">{{ _libro.isbn || 'No disponible' }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label"><i class="pi pi-sort-numeric-up"></i> Edición:</div>
+            <div class="info-value">{{ _libro.edicion || 'No disponible' }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label"><i class="pi pi-calendar"></i> Año:</div>
+            <div class="info-value">{{ _libro.anio || 'No disponible' }}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label"><i class="pi pi-globe"></i> Idioma:</div>
+            <div class="info-value">{{ _libro.idioma || 'No disponible' }}</div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+            <h2 class="section-title">
+              <i class="pi pi-book"></i>
+              Detalles Editoriales
+            </h2>
+            <div class="section-content">
+              <div class="details-grid">
+                <div class="detail-item">
+                  <div class="detail-label">Editorial:</div>
+                  <div class="detail-value">{{ _libro.editorial || 'No disponible' }}</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Clasificación:</div>
+                  <div class="detail-value">{{ _libro.clasificacion || 'No disponible' }}</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Número de Páginas:</div>
+                  <div class="detail-value">{{ _libro.numeroPaginas || 'No disponible' }}</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Ejemplares Disponibles:</div>
+                  <div class="detail-value">{{ _libro.cantidadEjemplares || '0' }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  
+      <!-- Columna derecha: Información detallada -->
+      <div class="book-details-column">
+        <div class="detail-section">
+          <h2 class="section-title">
+            <i class="pi pi-align-left"></i>
+            Descripción
+          </h2>
+          <div class="section-content description-content">
+            <p>{{ _libro.descripcion || 'No hay descripción disponible para este libro.' }}</p>
+          </div>
+        </div>
+
+  
+        <div class="detail-section">
+          <h2 class="section-title">
+            <i class="pi pi-users"></i>
+            Autores
+          </h2>
+          <div class="section-content">
+            <div *ngIf="selectedAutores && selectedAutores.length > 0" class="authors-grid">
+              <div class="author-card" *ngFor="let autor of selectedAutores">
+                <div class="author-avatar">
+                  <i class="pi pi-user"></i>
+                </div>
+                <div class="author-info">
+                  <h3 class="author-name">{{ autor.nombre }} {{ autor.apellidoPaterno }} {{ autor.apellidoMaterno }}</h3>
+                  <span class="author-type">{{ autor.tipoAutor }}</span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!selectedAutores || selectedAutores.length === 0" class="no-authors">
+              <i class="pi pi-info-circle"></i>
+              <span>No hay autores registrados para este libro</span>
+            </div>
+          </div>
+        </div>
+  
+        <div class="detail-section" *ngIf="_libro.observaciones">
+          <h2 class="section-title">
+            <i class="pi pi-comment"></i>
+            Observaciones
+          </h2>
+          <div class="section-content">
+            <p class="observations-text">{{ _libro.observaciones }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="image-preview-modal" [class.active]="previewModalActive">
+    <img [src]="previewModalSrc" alt="Vista previa" class="modal-image" *ngIf="previewModalSrc">
+    <div class="modal-close" (click)="closeImagePreview()">
+      <i class="pi pi-times"></i>
+    </div>
+  </div>

@@ -116,6 +116,19 @@
       (libroChange)="cerrarForm()"
     ></app-libro-form>
   </p-dialog>
+
+  <p-dialog
+    [(visible)]="libroDialogShow"
+    [modal]="true"
+    [closable]="true"
+    [responsive]="true"
+    [style]="{ width: '50vw' }"
+  >
+    <app-obra-literaria-show
+      [libro]="selectLibro"
+    ></app-obra-literaria-show>
+  </p-dialog>
+  
   
   <p-dialog
     [(visible)]="deleteDialog"
