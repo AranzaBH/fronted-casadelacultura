@@ -16,6 +16,7 @@ export class CategoriaObraService {
   listarCategorias(): Observable<CategoriaObra[]> {
     return this.http.get<CategoriaObra[]>(this.raiz);
   }
+  
 
   // Obtener una categoría de obra por ID
   obtenerCategoriaPorId(id: number): Observable<CategoriaObra> {

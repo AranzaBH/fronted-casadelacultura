@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Autor } from '../autor/Autor';
-import { ObraPictorica } from './ObraFonografica';
+import { ObraPictorica } from './ObraPictorica';
 
 
 @Injectable({
   providedIn: 'root',
 })
-export class LibroService {
+export class ObraPictoricaService {
   private apiUrl = environment.configuracion.url+'/api/obra'; // Cambia esta URL según tu backend
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
