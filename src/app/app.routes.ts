@@ -27,6 +27,7 @@ import { ActividadesTallerComponent } from './components/actividades/actividades
 import { CrearActividadComponent } from './components/actividades/crear-actividad.component';
 import { CuestionarioComponent } from './components/cuestionario/cuestionario.component';
 import { LibroListComponent } from './components/obra-literaria/obra-literaria.component';
+import { ObraPictoricaListComponent } from './components/obra-pictorica/obra-pictorica.component';
 
 export const routes: Routes = [
  
@@ -42,6 +43,11 @@ export const routes: Routes = [
   {
     path:'libro',
     component:LibroListComponent
+  },
+
+  {
+    path:'obra-pictorica',
+    component:ObraPictoricaListComponent
   },
 
   {

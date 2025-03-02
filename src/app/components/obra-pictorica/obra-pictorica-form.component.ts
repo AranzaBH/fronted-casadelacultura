@@ -19,6 +19,7 @@ import { CategoriaObra } from '../categoria-obra/CategoriaObra';
 import { Tecnica } from '../tecnicas/Tecnica';
 import { ObraPictoricaService } from './obra-pictorica.service';
 import { CategoriaObraService } from '../categoria-obra/categoria-obra.service';
+import { TecnicaService } from '../tecnicas/tecnicas.service';
 
 @Component({
     selector: 'app-obra-pictorica-form',
@@ -93,7 +94,8 @@ export class ObraPictoricaFormComponent implements OnInit {
   constructor(
     private autorService: AutorService,
     private obraService:ObraPictoricaService,
-    private categoriaService:CategoriaObraService
+    private categoriaService:CategoriaObraService,
+    private tecnicaService:TecnicaService
   ) {}
 
   get obra() {
@@ -103,6 +105,7 @@ export class ObraPictoricaFormComponent implements OnInit {
   ngOnInit() {
     this.loadAutores();
     this.loadCategorias();
+    this.loadTecnicas();
   }
 
   loadAutores() {
@@ -121,6 +124,14 @@ export class ObraPictoricaFormComponent implements OnInit {
     });
   }
 
+  loadTecnicas(){
+    this.tecnicaService.listarTecnicas().subscribe({
+      next: (data: Tecnica[]) => {
+        this.tecnicas = data;
+      }
+    });
+  }
+
   async save() {
     this._obra.autores = this.selectedAutores;
     if (this._obra.id) {
@@ -132,11 +143,12 @@ export class ObraPictoricaFormComponent implements OnInit {
 
   create() {
     const formData = new FormData();
-    formData.append("libro", JSON.stringify(this._obra));
+    formData.append("obra", JSON.stringify(this._obra));
     if (this.selectedFile) {
       formData.append("archivo", this.selectedFile);
     }
     console.log("esto envio",this._obra);
+    console.log("esto archivo",this.selectedFile);
     this.obraService.crearObra(formData).subscribe({
       next: (data: any) => {
         if (data.success) {

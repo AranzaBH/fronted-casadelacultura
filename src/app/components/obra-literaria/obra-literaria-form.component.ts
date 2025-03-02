@@ -128,6 +128,7 @@ export class LibroFormComponent implements OnInit {
       formData.append("archivo", this.selectedFile);
     }
     console.log("esto envio",this._libro);
+    console.log("esto obra",this.selectedFile);
     this.libroService.crearLibro(formData).subscribe({
       next: (data: any) => {
         if (data.success) {

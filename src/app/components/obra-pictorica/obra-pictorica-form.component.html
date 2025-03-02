@@ -98,7 +98,7 @@
   
         <!-- Detalles del libro -->
         <div class="form-section">
-          <h3 class="section-title">Detalles del Libro</h3>
+          <h3 class="section-title">Detalles de la obra</h3>
           
           <div class="form-row">
             <div class="form-group">
@@ -141,7 +141,7 @@
               </div>
             </div>
           </div>
-
+          <div class="form-row">
           <div class="form-group">
             <label for="localizacion" class="form-label">
               <i class="pi pi-building"></i>
@@ -161,31 +161,33 @@
               <span class="focus-border"><i></i></span>
             </div>
           </div>
-        </div>
-  
-        
-            <div class="form-group">
-              <label for="anio" class="form-label">
-                <i class="pi pi-calendar"></i>
-                <span>Año</span>
-              </label>
-              <div class="input-container">
-                <p-inputNumber
-                  id="anio"
-                  name="anio"
-                  [(ngModel)]="obra.anioObra"
-                  [showButtons]="false"
-                  placeholder="Año de publicación"
-                  [min]="1800"
-                  [max]="2025"
-                ></p-inputNumber>
-              </div>
+
+          <div class="form-group">
+            <label for="anio" class="form-label">
+              <i class="pi pi-calendar"></i>
+              <span>Año</span>
+            </label>
+            <div class="input-container">
+              <p-inputNumber
+                id="anio"
+                name="anio"
+                [(ngModel)]="obra.anioObra"
+                [showButtons]="false"
+                class="form-control"
+                placeholder="Año de publicación"
+                [min]="1800"
+                [max]="2025"
+              ></p-inputNumber>
             </div>
+          </div>
+
+        </div>
+        </div>
 
   
         <!-- Clasificación y Categoría -->
         <div class="form-section">
-          <h3 class="section-title">Clasificación y Categoría</h3>
+          <h3 class="section-title">Tecnica y Categoría</h3>
           
           <div class="form-row">
             
