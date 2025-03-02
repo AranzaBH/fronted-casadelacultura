@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, ViewChild, EventEmitter, Input } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -16,7 +15,6 @@ import { Libro } from './Libro';
 import { Autor } from '../autor/Autor';
 import { CategoriaLibro } from '../categoria-libro/CategoriaLibro';
 import { LibroService } from './obra-literaria.service';
-import { ImagenesLiterariasService} from './imagenes-literarias.service';
 
 @Component({
   selector: 'app-libro-form',
@@ -50,8 +48,9 @@ import { ImagenesLiterariasService} from './imagenes-literarias.service';
 export class LibroFormComponent implements OnInit {
   @ViewChild('formulario') formulario: any;
   @Output() libroChange: EventEmitter<Libro> = new EventEmitter<Libro>();
-  
   message: string = '';
+  previewModalActive: boolean = false;
+  previewModalSrc: string = '';
   messageType: 'success' | 'error' | '' = '';
   _libro!: Libro;
   selectedFile:any;
@@ -60,21 +59,27 @@ export class LibroFormComponent implements OnInit {
   selectedAutores: Autor[] = [];
   uploadedFiles: any[] = [];
   previewImages: string[] = [];
-  idiomas: string[] = ['Español', 'Inglés', 'Francés', 'Alemán', 'Italiano', 'Portugués', 'Otro'];
-  
+  idiomas: string[] = ['Español','Inglés','Francés','Alemán','Italiano','Portugués','Otro'];
+
   @Input() set libro(libro: Libro) {
     this._libro = new Libro();
     if (libro && libro.id) {
       this.libroService.getLibro(libro.id).subscribe({
-        next: (libroDataServer: Libro) => {
-          this._libro = libroDataServer;
-          this.selectedAutores = this._libro.autores || [];
-          this.previewImages = this._libro.imagenes ? this._libro.imagenes : [];
+        next: (response:any) => {
+            console.log("response",response);
+            this._libro = response.libro;
+            console.log("libro",this._libro)
+            this.selectedAutores = response.autores;
+            this._libro.categoriaLibro = this.categorias.find(
+              cat => cat.id === response.libro.categoriaLibro.id
+            ) || response.libro.categoriaLibro;
         }
-      });
+    });
     }
+    this.selectedAutores= [];
+    this.selectedFile = null;
   }
-
+  
   constructor(
     private libroService: LibroService,
     private autorService: AutorService,
@@ -98,7 +103,7 @@ export class LibroFormComponent implements OnInit {
     });
   }
 
-  loadCategorias() {
+  loadCategorias(){
     this.categoriaService.listarTodas().subscribe({
       next: (data: CategoriaLibro[]) => {
         this.categorias = data;
@@ -106,30 +111,8 @@ export class LibroFormComponent implements OnInit {
     });
   }
 
-
-  onFileSelect(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
-      
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.previewImages = [e.target.result];
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-  
-  removeImage(index: number) {
-    this.previewImages.splice(index, 1);
-    this.uploadedFiles.splice(index, 1);
-  }
-
   async save() {
-    
-
     this._libro.autores = this.selectedAutores;
-console.log("envio esto",this._libro)
     if (this._libro.id) {
       this.update();
     } else {
@@ -137,17 +120,13 @@ console.log("envio esto",this._libro)
     }
   }
 
-  
-
   create() {
     const formData = new FormData();
-  
     formData.append("libro", JSON.stringify(this._libro));
-  
     if (this.selectedFile) {
       formData.append("archivo", this.selectedFile);
     }
-  
+    console.log("esto envio",this._libro);
     this.libroService.crearLibro(formData).subscribe({
       next: (data: any) => {
         if (data.success) {
@@ -171,8 +150,6 @@ console.log("envio esto",this._libro)
     });
   }
 
- 
-
   update() {
     this.libroService.update(this._libro).subscribe({
       next: (data: any) => {
@@ -195,5 +172,53 @@ console.log("envio esto",this._libro)
         this.messageType = 'error';
       }
     });
+  }
+
+  onFileSelect(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      if (!file.type.match('image.*')) {
+        this.message = 'Por favor, seleccione un archivo de imagen válido.';
+        this.messageType = 'error';
+        return;
+      }
+      
+      if (file.size > 3 * 1024 * 1024) {
+        this.message = 'La imagen no debe exceder los 5MB.';
+        this.messageType = 'error';
+        return;
+      }
+      
+      this.selectedFile = file;
+      
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.previewImages = [e.target.result];
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  removeImage() {
+    this.previewImages = [];
+    this.selectedFile = null;
+    
+    if (this._libro.urlImagenPortada) {
+      
+      this._libro.urlImagenPortada = '';
+    }
+  }
+  
+  openImagePreview(src: any) {
+    this.previewModalSrc = src;
+    this.previewModalActive = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeImagePreview() {
+    this.previewModalActive = false;
+    this.previewModalSrc = '';
+    
+    document.body.style.overflow = '';
   }
 }

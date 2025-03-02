@@ -228,6 +228,7 @@
                 <span>Categoría</span>
               </label>
               <div class="input-container select-container">
+                
                 <select
                   id="categoria"
                   name="categoria"
@@ -237,8 +238,8 @@
                   #categoria="ngModel"
                 >
                   <option value="" disabled selected>Seleccione una categoría</option>
-                  <option *ngFor="let cat of categorias" [ngValue]="cat">
-                    {{ cat.nombre }}
+                  <option *ngFor="let categoriaLibro of categorias" [ngValue]="categoriaLibro">
+                    {{ categoriaLibro.nombre }}
                   </option>
                 </select>
                 <span class="select-arrow">
@@ -269,7 +270,6 @@
           </div>
         </div>
   
-       <!-- Reemplaza la sección de autores existente con esto -->
 <div class="form-section authors-section">
   <h3 class="section-title">
     <i class="pi pi-users"></i>
@@ -337,18 +337,85 @@
   </div>
 </div>
   
-        <!-- Imágenes -->
-        <div class="form-section">
-          <h3 class="section-title">Imágenes</h3>
+        <div class="form-section image-upload-section">
+          <h3 class="image-upload-title">
+            <i class="pi pi-image"></i>
+            Portada del Libro
+          </h3>
           
-          <div class="form-group">
-            <input type="file" (change)="onFileSelect($event)" />
-<img *ngIf="previewImages.length" [src]="previewImages[0]" alt="Vista previa" />
-             
+          <div class="image-upload-container">
+            <div class="book-cover-container">
+              <div class="book-cover-frame" *ngIf="libro.urlImagenPortada || previewImages.length > 0">
+                <img 
+                  [src]="previewImages.length > 0 ? previewImages[0] : libro.urlImagenPortada" 
+                  alt="Portada del libro" 
+                  class="book-cover-image"
+                  (click)="openImagePreview(previewImages.length > 0 ? previewImages[0] : libro.urlImagenPortada)"
+                />
+                <div class="image-preview-actions">
+                  <button 
+                    type="button" 
+                    class="image-action-button remove" 
+                    (click)="removeImage()"
+                    *ngIf="previewImages.length > 0 || libro.urlImagenPortada"
+                    title="Eliminar imagen"
+                  >
+                    <i class="pi pi-trash"></i>
+                  </button>
+                  <button 
+                    type="button" 
+                    class="image-action-button zoom" 
+                    (click)="openImagePreview(previewImages.length > 0 ? previewImages[0] : libro.urlImagenPortada)"
+                    title="Ver imagen"
+                  >
+                    <i class="pi pi-search-plus"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="no-image-placeholder" *ngIf="!libro.urlImagenPortada && previewImages.length === 0">
+                <div class="no-image-icon">
+                  <i class="pi pi-image"></i>
+                </div>
+                <div class="no-image-text">
+                  No hay portada seleccionada
+                </div>
+              </div>
+              
+              <div class="book-cover-info" *ngIf="libro.urlImagenPortada && !previewImages.length">
+                Portada actual
+              </div>
+              <div class="book-cover-info" *ngIf="previewImages.length">
+                Nueva portada seleccionada
+              </div>
+            </div>
+            
+            <div class="file-upload-wrapper">
+              <button type="button" class="file-upload-button">
+                <i class="pi pi-upload"></i>
+                <span>Seleccionar portada</span>
+              </button>
+              <input 
+                type="file" 
+                class="file-upload-input" 
+                (change)="onFileSelect($event)" 
+                accept="image/*"
+              />
+            </div>
+            
+            <div class="file-name-display" *ngIf="selectedFile">
+              Archivo seleccionado: {{ selectedFile.name }}
+            </div>
+          </div>
+        </div>
+        
+        <div class="image-preview-modal" [class.active]="previewModalActive">
+          <img [src]="previewModalSrc" alt="Vista previa" class="modal-image" *ngIf="previewModalSrc">
+          <div class="modal-close" (click)="closeImagePreview()">
+            <i class="pi pi-times"></i>
           </div>
         </div>
   
-        <!-- Observaciones -->
         <div class="form-section">
           <h3 class="section-title">Observaciones</h3>
           

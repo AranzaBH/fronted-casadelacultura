@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Libro } from './Libro';
+import { Autor } from '../autor/Autor';
 
 
 @Injectable({
@@ -19,6 +20,10 @@ export class LibroService {
   // Obtener un taller por ID
   getLibro(id: number) {
     return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
+  getLibroAutor(id: number): Observable<{ libro: Libro; autores: Autor[] }> {
+    return this.http.get<{ libro: Libro; autores: Autor[] }>(`${this.apiUrl}/${id}`);
   }
 
   // Crear un nuevo taller
