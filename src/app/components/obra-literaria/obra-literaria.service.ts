@@ -42,9 +42,10 @@ export class LibroService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  update(obj: any) {
-    return this.http.put(this.apiUrl + '/' + obj.id, obj);
+  update(id?: number, formData?: FormData) {
+    return this.http.put(`${this.apiUrl}/actualizar/${id}`, formData);
   }
+
 
   // Desactivar un taller por ID
   desactivarLibro(id: number): Observable<void> {

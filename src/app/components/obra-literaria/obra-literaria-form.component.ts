@@ -78,6 +78,7 @@ export class LibroFormComponent implements OnInit {
     }
     this.selectedAutores= [];
     this.selectedFile = null;
+    this._libro.urlImagenPortada = '';
   }
   
   constructor(
@@ -151,28 +152,38 @@ export class LibroFormComponent implements OnInit {
   }
 
   update() {
-    this.libroService.update(this._libro).subscribe({
+    const formData = new FormData();
+    formData.append("libro", JSON.stringify(this._libro));
+  
+    if (this.selectedFile) {
+      formData.append("archivo", this.selectedFile);
+    }
+  
+    console.log("📤 Enviando actualización:", this._libro);
+  
+    this.libroService.update(this._libro.id, formData).subscribe({
       next: (data: any) => {
         if (data.success) {
-          this.message = 'Libro actualizado exitosamente';
-          this.messageType = 'success';
-          
+          this.message = "Libro actualizado exitosamente";
+          this.messageType = "success";
+  
           setTimeout(() => {
             this.libroChange.emit(this._libro);
-            this.message = '';
-            this.messageType = '';
+            this.message = "";
+            this.messageType = "";
           }, 1500);
         } else {
-          this.message = data.message || 'Hubo un problema al actualizar el libro.';
-          this.messageType = 'error';
+          this.message = data.message || "Hubo un problema al actualizar el libro.";
+          this.messageType = "error";
         }
       },
       error: () => {
-        this.message = 'Hubo un problema al comunicar con el servidor.';
-        this.messageType = 'error';
+        this.message = "Hubo un problema al comunicar con el servidor.";
+        this.messageType = "error";
       }
     });
   }
+  
 
   onFileSelect(event: any) {
     const file = event.target.files[0];
