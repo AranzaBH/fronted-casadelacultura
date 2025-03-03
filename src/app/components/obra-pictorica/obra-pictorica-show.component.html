@@ -121,6 +121,30 @@
             </div>
           </div>
         </div>
+
+        <div class="detail-section">
+          <h2 class="section-title">
+            <i class="pi pi-users"></i>
+            Materiales
+          </h2>
+          <div class="section-content">
+            <div *ngIf="selectedMateriales && selectedMateriales.length > 0" class="authors-grid">
+              <div class="author-card" *ngFor="let material of selectedMateriales">
+                <div class="author-avatar">
+                  <i class="pi pi-user"></i>
+                </div>
+                <div class="author-info">
+                  <h3 class="author-name">{{ material.material }}</h3>
+                  <span class="author-type">{{ material.descripcion }}</span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!selectedMateriales || selectedMateriales.length === 0" class="no-authors">
+              <i class="pi pi-info-circle"></i>
+              <span>No hay materiales registrados para esta obra</span>
+            </div>
+          </div>
+        </div>
   
       </div>
     </div>

@@ -7,6 +7,7 @@ import { ObraPictorica } from './ObraPictorica';
 import { CategoriaObra } from '../categoria-obra/CategoriaObra';
 import { ObraPictoricaService } from './obra-pictorica.service';
 import { CategoriaObraService } from '../categoria-obra/categoria-obra.service';
+import { Material } from '../materiales/Material';
 
 @Component({
     selector: 'app-obra-pictorica-show',
@@ -26,6 +27,7 @@ import { CategoriaObraService } from '../categoria-obra/categoria-obra.service';
 export class ObraPictoricaShowComponent  implements OnInit {
     _obra!: ObraPictorica;
     selectedAutores: Autor[] = [];
+    selectedMateriales: Material[] = [];
     categorias: CategoriaObra[] = [];
     
     previewModalActive: boolean = false;
@@ -39,6 +41,7 @@ export class ObraPictoricaShowComponent  implements OnInit {
                     console.log("response", response);
                     this._obra = response.obra;
                     this.selectedAutores = response.autores;
+                    this.selectedMateriales = response.materiales;
                     
                     // Asegurarse de que la categoría esté correctamente asignada
                     if (response.obra.categoriaObra) {
