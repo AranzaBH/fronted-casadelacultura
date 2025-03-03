@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Materiales } from './Material';
+import { Material } from './Material';
 
 
 @Injectable({
@@ -13,24 +13,24 @@ export class MaterialService {
   constructor(private http: HttpClient) {}
 
   // Listar todas las categorías de obra
-  listarMateriales(): Observable<Materiales[]> {
-    return this.http.get<Materiales[]>(this.raiz);
+  listarMateriales(): Observable<Material[]> {
+    return this.http.get<Material[]>(this.raiz);
   }
   
 
   // Obtener una categoría de obra por ID
-  obtenerMaterialPorId(id: number): Observable<Materiales> {
-    return this.http.get<Materiales>(`${this.raiz}/${id}`);
+  obtenerMaterialPorId(id: number): Observable<Material> {
+    return this.http.get<Material>(`${this.raiz}/${id}`);
   }
 
   // Crear una nueva categoría de obra
-  crearMaterial(material: Materiales): Observable<Materiales> {
-    return this.http.post<Materiales>(this.raiz, material);
+  crearMaterial(material: Material): Observable<Material> {
+    return this.http.post<Material>(this.raiz, material);
   }
 
   // Actualizar una categoría de obra existente
-  actualizarMaterial(id: number, material: Materiales): Observable<Materiales> {
-    return this.http.put<Materiales>(`${this.raiz}/${id}`, material);
+  actualizarMaterial(id: number, material: Material): Observable<Material> {
+    return this.http.put<Material>(`${this.raiz}/${id}`, material);
   }
 
   // Eliminar una categoría de obra
@@ -43,8 +43,8 @@ export class MaterialService {
     return this.http.post(this.raiz+'/list',body);
   }
 
-  get(id: number): Observable<Materiales> {
-      return this.http.get<Materiales>(`${this.raiz}/${id}`);
+  get(id: number): Observable<Material> {
+      return this.http.get<Material>(`${this.raiz}/${id}`);
   }
 
   save(obj: any) {

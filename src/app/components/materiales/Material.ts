@@ -1,7 +1,7 @@
-export class Materiales{
+export class Material{
     id?:number;
-    material?:string;
-    descripcion?:string;
-    activo?:boolean;
-    fechaCreacion?:Date;
+    material!:string;
+    descripcion!:string;
+    activo!:boolean;
+    fechaCreacion!:Date;
 }
