@@ -28,6 +28,7 @@ import { CrearActividadComponent } from './components/actividades/crear-activida
 import { CuestionarioComponent } from './components/cuestionario/cuestionario.component';
 import { LibroListComponent } from './components/obra-literaria/obra-literaria.component';
 import { ObraPictoricaListComponent } from './components/obra-pictorica/obra-pictorica.component';
+import { MaterialListComponent } from './components/materiales/materiales.component';
 
 export const routes: Routes = [
  
@@ -69,6 +70,11 @@ export const routes: Routes = [
   {
     path:'usuarios',
     component:UsuarioListComponent
+  },
+
+  {
+    path:'material',
+    component:MaterialListComponent
   },
 
   {
