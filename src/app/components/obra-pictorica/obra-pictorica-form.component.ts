@@ -20,6 +20,8 @@ import { Tecnica } from '../tecnicas/Tecnica';
 import { ObraPictoricaService } from './obra-pictorica.service';
 import { CategoriaObraService } from '../categoria-obra/categoria-obra.service';
 import { TecnicaService } from '../tecnicas/tecnicas.service';
+import { Material } from '../materiales/Material';
+import { MaterialService } from '../materiales/material.service';
 
 @Component({
     selector: 'app-obra-pictorica-form',
@@ -63,6 +65,8 @@ export class ObraPictoricaFormComponent implements OnInit {
   categorias: CategoriaObra[] = [];
   tecnicas: Tecnica[] = [];
   selectedAutores: Autor[] = [];
+  materiales:Material[]=[];
+  selectedMateriales:Material[]=[];
   uploadedFiles: any[] = [];
   previewImages: string[] = [];
   idiomas: string[] = ['Español','Inglés','Francés','Alemán','Italiano','Portugués','Otro'];
@@ -76,6 +80,10 @@ export class ObraPictoricaFormComponent implements OnInit {
             this._obra = response.obra;
             console.log("obra",this._obra)
             this.selectedAutores = response.autores;
+            if(response.materiales){
+              this.selectedMateriales=response.materiales;
+            }
+            
             this._obra.categoriaObra = this.categorias.find(
               cat => cat.id === response.obra.categoriaObra.id
             ) || response.obra.categoriaObra;
@@ -87,6 +95,7 @@ export class ObraPictoricaFormComponent implements OnInit {
     });
     }
     this.selectedAutores= [];
+    this.selectedMateriales= [];
     this.selectedFile = null;
     this.previewImages=[];
     this._obra.urlImagenPortada = '';
@@ -96,7 +105,8 @@ export class ObraPictoricaFormComponent implements OnInit {
     private autorService: AutorService,
     private obraService:ObraPictoricaService,
     private categoriaService:CategoriaObraService,
-    private tecnicaService:TecnicaService
+    private tecnicaService:TecnicaService,
+    private materialService:MaterialService
   ) {}
 
   get obra() {
@@ -107,12 +117,21 @@ export class ObraPictoricaFormComponent implements OnInit {
     this.loadAutores();
     this.loadCategorias();
     this.loadTecnicas();
+    this.loadMateriales();
   }
 
   loadAutores() {
     this.autorService.listarLiteraria().subscribe({
        next: (data: Autor[]) => {
          this.autores = data;
+       }
+    });
+  }
+
+  loadMateriales() {
+    this.materialService.listarMateriales().subscribe({
+       next: (data: Material[]) => {
+         this.materiales = data;
        }
     });
   }
@@ -135,6 +154,7 @@ export class ObraPictoricaFormComponent implements OnInit {
 
   async save() {
     this._obra.autores = this.selectedAutores;
+    this._obra.materiales=this.selectedMateriales;
     if (this._obra.id) {
       this.update();
     } else {

@@ -1,5 +1,6 @@
 import { Autor } from "../autor/Autor";
 import { CategoriaObra } from "../categoria-obra/CategoriaObra";
+import { Material } from "../materiales/Material";
 import { Tecnica } from "../tecnicas/Tecnica";
 
 export class ObraPictorica{
@@ -18,5 +19,6 @@ export class ObraPictorica{
   autores?:Autor[];
   imagenes?:string[];
   urlImagenPortada?:string;
+  materiales?:Material[];
 
 }

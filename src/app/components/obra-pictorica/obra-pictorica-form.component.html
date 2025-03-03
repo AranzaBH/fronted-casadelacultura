@@ -248,7 +248,72 @@
   
          
         </div>
-  
+<!-- Inicio materiales -->
+        <div class="form-section authors-section">
+          <h3 class="section-title">
+            <i class="pi pi-users"></i>
+            Materiales de la obra
+          </h3>
+          
+          <div class="form-group">
+            <div class="authors-container">
+              <p-multiSelect
+                [options]="materiales"
+                [(ngModel)]="selectedMateriales"
+                [ngModelOptions]="{standalone: true}"
+                optionLabel="material"
+                placeholder="Buscar y seleccionar materiales"
+                [filter]="true"
+                filterBy="material,descripcion"
+                [showToggleAll]="true"
+                styleClass="authors-multiselect"
+                [panelStyle]="{minWidth: '100%'}"
+              >
+                <ng-template pTemplate="header">
+                  <div class="multiselect-header">
+                    <span class="selected-count">
+                      {{ materiales.length }} material(es) seleccionado(s)
+                    </span>
+                  </div>
+                </ng-template>
+                
+                <ng-template let-material pTemplate="item">
+                  <div class="author-item">
+                    <div class="author-avatar">
+                      <i class="pi pi-user"></i>
+                    </div>
+                    <div class="author-info">
+                      <span class="author-name">
+                        {{ material.material }} {{ material.descripcio  }} 
+                      </span>
+                    </div>
+                  </div>
+                </ng-template>
+        
+                <ng-template let-material pTemplate="selectedItem">
+                  <div class="selected-author">
+                    <i class="pi pi-user"></i>
+                    <span>{{ material.material}} {{ material.descripcion }}</span>
+                  </div>
+                </ng-template>
+              </p-multiSelect>
+            </div>
+        
+            <div class="selected-authors-preview" *ngIf="selectedMateriales.length > 0">
+              <div class="selected-authors-grid">
+                <div class="author-card" *ngFor="let material of selectedMateriales">
+                  <div class="author-card-avatar">
+                    <i class="pi pi-user"></i>
+                  </div>
+                  <div class="author-card-info">
+                    <h4>{{ material.material }} {{ material.descripcion }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  <!-- Fin materiales -->
 <div class="form-section authors-section">
   <h3 class="section-title">
     <i class="pi pi-users"></i>
