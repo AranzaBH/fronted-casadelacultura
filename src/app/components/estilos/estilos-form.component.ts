@@ -35,7 +35,7 @@ import { EstilosService } from './estilos.service';
 
 export class EstilosFormComponent implements OnInit {
   @ViewChild('formulario') formulario: any;
-    @Output() estiloObraChange: EventEmitter<Estilos> = new EventEmitter<Estilos>();
+    @Output() estiloChange: EventEmitter<Estilos> = new EventEmitter<Estilos>();
     message: string = '';
     messageType: 'success' | 'error' | '' = '';
     _estilo!: Estilos;
@@ -79,7 +79,7 @@ export class EstilosFormComponent implements OnInit {
           this.messageType = 'success';
 
           setTimeout(() => {
-            this.estiloObraChange.emit(this.estilo);
+            this.estiloChange.emit(this.estilo);
             this.message = '';
             this.messageType = '';
           }, 1500);
@@ -104,7 +104,7 @@ export class EstilosFormComponent implements OnInit {
           this.messageType = 'success';
 
           setTimeout(() => {
-            this.estiloObraChange.emit(this.estilo);
+            this.estiloChange.emit(this.estilo);
             this.message = '';
             this.messageType = '';
           }, 1500);
