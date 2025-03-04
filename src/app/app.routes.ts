@@ -29,6 +29,7 @@ import { CuestionarioComponent } from './components/cuestionario/cuestionario.co
 import { LibroListComponent } from './components/obra-literaria/obra-literaria.component';
 import { ObraPictoricaListComponent } from './components/obra-pictorica/obra-pictorica.component';
 import { MaterialListComponent } from './components/materiales/materiales.component';
+import { EstilosListComponent } from './components/estilos/estilos.component';
 
 export const routes: Routes = [
  
@@ -75,6 +76,11 @@ export const routes: Routes = [
   {
     path:'material',
     component:MaterialListComponent
+  },
+
+  {
+    path:'estilo',
+    component:EstilosListComponent
   },
 
   {
