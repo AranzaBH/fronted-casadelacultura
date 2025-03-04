@@ -1,0 +1,402 @@
+<div class="form-wrapper">
+    <div *ngIf="message" 
+         class="alert-custom" 
+         [ngClass]="{'alert-success': messageType === 'success', 'alert-danger': messageType === 'error'}"
+         [@fadeSlide]>
+      <div class="alert-icon">
+        <i [class]="messageType === 'success' ? 'pi pi-check-circle' : 'pi pi-exclamation-circle'"></i>
+      </div>
+      <span class="alert-message">{{ message }}</span>
+    </div>
+  
+    <form #formulario="ngForm" (ngSubmit)="save()" class="form-container">
+      <div class="form-header">
+        <div class="form-title-decoration"></div>
+        <h2 class="form-title">
+          {{ !obra.id ? 'Crear Obra' : 'Actualizar Obra' }}
+        </h2>
+        <div class="form-title-decoration"></div>
+      </div>
+  
+      <div class="form-body">
+        <!-- Información básica -->
+        <div class="form-section">
+          <h3 class="section-title">Información Básica</h3>
+          
+          <div class="form-group">
+            <label for="titulo" class="form-label">
+              <i class="pi pi-book"></i>
+              <span>Título</span>
+            </label>
+            <div class="input-container">
+              <input
+                type="text"
+                id="titulo"
+                name="titulo"
+                [(ngModel)]="obra.titulo"
+                class="form-control"
+                placeholder="Ingrese el título"
+                required
+                #titulo="ngModel"
+              />
+              <span class="focus-border"><i></i></span>
+            </div>
+            <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="error-message">
+              <i class="pi pi-exclamation-circle"></i>
+              El título es requerido
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="tituloOriginal" class="form-label">
+              <i class="pi pi-book"></i>
+              <span>Origen</span>
+            </label>
+            <div class="input-container">
+              <input
+                type="text"
+                id="origen"
+                name="origen"
+                [(ngModel)]="obra.origen"
+                class="form-control"
+                placeholder="Ingrese el origen"
+                required
+                #origen="ngModel"
+              />
+              <span class="focus-border"><i></i></span>
+            </div>
+            <div *ngIf="origen.invalid && (origen.dirty || origen.touched)" class="error-message">
+              <i class="pi pi-exclamation-circle"></i>
+              El origen es requerido
+            </div>
+          </div>
+          
+        </div>
+  
+        <!-- Detalles del libro -->
+        <div class="form-section">
+          <h3 class="section-title">Detalles de la obra</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="codigo" class="form-label">
+                <i class="pi pi-id-card"></i>
+                <span>Clasificación</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="clasificacion"
+                  name="clasificacion"
+                  [(ngModel)]="obra.clasificacion"
+                  class="form-control"
+                  placeholder="Ingrese el codigo"
+                  required
+                  #clasificacion="ngModel"
+                />
+                <span class="focus-border"><i></i></span>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="dimension" class="form-label">
+                <i class="pi pi-building"></i>
+                <span>Ubicación</span>
+              </label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="ubicacion"
+                  name="ubicacion"
+                  [(ngModel)]="obra.ubicacion"
+                  class="form-control"
+                  placeholder="Ingrese la Ubicación"
+                  required
+                  #ubicacion="ngModel"
+                />
+                <span class="focus-border"><i></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+          <div class="form-group">
+            <label for="localizacion" class="form-label">
+              <i class="pi pi-building"></i>
+              <span>Fecha</span>
+            </label>
+            <div class="input-container">
+              <input
+                type="text"
+                id="fecha"
+                name="fecha"
+                [(ngModel)]="obra.fecha"
+                class="form-control"
+                placeholder="Ingrese la fecha"
+                required
+                #fecha="ngModel"
+              />
+              <span class="focus-border"><i></i></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="anio" class="form-label">
+              <i class="pi pi-calendar"></i>
+              <span>Año</span>
+            </label>
+            <div class="input-container">
+              <p-inputNumber
+                id="anio"
+                name="anio"
+                [(ngModel)]="obra.anio"
+                [showButtons]="false"
+                class="form-control"
+                placeholder="Año de publicación"
+                [min]="1800"
+                [max]="2025"
+              ></p-inputNumber>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cantidadEjemplares" class="form-label">
+              <i class="pi pi-copy"></i>
+              <span>Cantidad</span>
+            </label>
+            <div class="input-container">
+              <p-inputNumber
+                id="cantidadEjemplares"
+                name="cantidadEjemplares"
+                [(ngModel)]="obra.cantidad"
+                [showButtons]="false"
+                placeholder="Cantidad"
+                [min]="1"
+              ></p-inputNumber>
+            </div>
+          </div>
+
+        </div>
+        </div>
+
+  
+        <!-- Clasificación y Categoría -->
+        <div class="form-section">
+          <h3 class="section-title">Estilo</h3>
+          
+          <div class="form-row">
+            
+  
+            <div class="form-group">
+              <label for="estilo" class="form-label">
+                <i class="pi pi-tags"></i>
+                <span>Estilo</span>
+              </label>
+              <div class="input-container select-container">
+                
+                <select
+                  id="estilo"
+                  name="estilo"
+                  [(ngModel)]="obra.estilo"
+                  class="form-control custom-select"
+                  required
+                  #estilo="ngModel"
+                >
+                  <option value="" disabled selected>Seleccione un estilo</option>
+                  <option *ngFor="let estilo of estilos" [ngValue]="estilo">
+                    {{ estilo.estilo }}
+                  </option>
+                </select>
+                <span class="select-arrow">
+                  <i class="pi pi-chevron-down"></i>
+                </span>
+              </div>
+            </div>
+
+
+          </div>
+  
+         
+        </div>
+<!-- Inicia autores -->
+<div class="form-section authors-section">
+  <h3 class="section-title">
+    <i class="pi pi-users"></i>
+    Autores del obra
+  </h3>
+  
+  <div class="form-group">
+    <div class="authors-container">
+      <p-multiSelect
+        [options]="autores"
+        [(ngModel)]="selectedAutores"
+        [ngModelOptions]="{standalone: true}"
+        optionLabel="nombre"
+        placeholder="Buscar y seleccionar autores"
+        [filter]="true"
+        filterBy="nombre,apellidoPaterno,apellidoMaterno"
+        [showToggleAll]="true"
+        styleClass="authors-multiselect"
+        [panelStyle]="{minWidth: '100%'}"
+      >
+        <ng-template pTemplate="header">
+          <div class="multiselect-header">
+            <span class="selected-count">
+              {{ selectedAutores.length }} autor(es) seleccionado(s)
+            </span>
+          </div>
+        </ng-template>
+        
+        <ng-template let-autor pTemplate="item">
+          <div class="author-item">
+            <div class="author-avatar">
+              <i class="pi pi-user"></i>
+            </div>
+            <div class="author-info">
+              <span class="author-name">
+                {{ autor.nombre }} {{ autor.apellidoPaterno }} {{ autor.apellidoMaterno }}
+              </span>
+              <span class="author-type">{{ autor.tipoAutor }}</span>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template let-autor pTemplate="selectedItem">
+          <div class="selected-author">
+            <i class="pi pi-user"></i>
+            <span>{{ autor.nombre }} {{ autor.apellidoPaterno }}</span>
+          </div>
+        </ng-template>
+      </p-multiSelect>
+    </div>
+
+    <div class="selected-authors-preview" *ngIf="selectedAutores.length > 0">
+      <div class="selected-authors-grid">
+        <div class="author-card" *ngFor="let autor of selectedAutores">
+          <div class="author-card-avatar">
+            <i class="pi pi-user"></i>
+          </div>
+          <div class="author-card-info">
+            <h4>{{ autor.nombre }} {{ autor.apellidoPaterno }}</h4>
+            <span>{{ autor.tipoAutor }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+        <div class="form-section image-upload-section">
+          <h3 class="image-upload-title">
+            <i class="pi pi-image"></i>
+            Portada de la obra
+          </h3>
+          
+          <div class="image-upload-container">
+            <div class="book-cover-container">
+              <div class="book-cover-frame" *ngIf="obra.urlImagenPortada || previewImages.length > 0">
+                <img 
+                  [src]="previewImages.length > 0 ? previewImages[0] : obra.urlImagenPortada" 
+                  alt="Portada del libro" 
+                  class="book-cover-image"
+                  (click)="openImagePreview(previewImages.length > 0 ? previewImages[0] : obra.urlImagenPortada)"
+                />
+                <div class="image-preview-actions">
+                  <button 
+                    type="button" 
+                    class="image-action-button remove" 
+                    (click)="removeImage()"
+                    *ngIf="previewImages.length > 0 || obra.urlImagenPortada"
+                    title="Eliminar imagen"
+                  >
+                    <i class="pi pi-trash"></i>
+                  </button>
+                  <button 
+                    type="button" 
+                    class="image-action-button zoom" 
+                    (click)="openImagePreview(previewImages.length > 0 ? previewImages[0] : obra.urlImagenPortada)"
+                    title="Ver imagen"
+                  >
+                    <i class="pi pi-search-plus"></i>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="no-image-placeholder" *ngIf="!obra.urlImagenPortada && previewImages.length === 0">
+                <div class="no-image-icon">
+                  <i class="pi pi-image"></i>
+                </div>
+                <div class="no-image-text">
+                  No hay portada seleccionada
+                </div>
+              </div>
+              
+              <div class="book-cover-info" *ngIf="obra.urlImagenPortada && !previewImages.length">
+                Portada actual
+              </div>
+              <div class="book-cover-info" *ngIf="previewImages.length">
+                Nueva portada seleccionada
+              </div>
+            </div>
+            
+            <div class="file-upload-wrapper">
+              <button type="button" class="file-upload-button">
+                <i class="pi pi-upload"></i>
+                <span>Seleccionar portada</span>
+              </button>
+              <input 
+                type="file" 
+                class="file-upload-input" 
+                (change)="onFileSelect($event)" 
+                accept="image/*"
+              />
+            </div>
+            
+            <div class="file-name-display" *ngIf="selectedFile">
+              Archivo seleccionado: {{ selectedFile.name }}
+            </div>
+          </div>
+        </div>
+        
+        <div class="image-preview-modal" [class.active]="previewModalActive">
+          <img [src]="previewModalSrc" alt="Vista previa" class="modal-image" *ngIf="previewModalSrc">
+          <div class="modal-close" (click)="closeImagePreview()">
+            <i class="pi pi-times"></i>
+          </div>
+        </div>
+
+
+        <div class="form-section">
+            <h3 class="section-title">Observaciones</h3>
+            
+            <div class="form-group">
+              <div class="input-container">
+                <textarea
+                  id="observacion"
+                  name="observacion"
+                  [(ngModel)]="obra.observaciones"
+                  class="form-control"
+                  rows="4"
+                  placeholder="Ingrese observaciones adicionales"
+                ></textarea>
+                <span class="focus-border"><i></i></span>
+              </div>
+            </div>
+          </div>
+  
+        
+      </div>
+  
+      <div class="form-footer">
+        <button type="submit" 
+                class="btn-submit" 
+                [disabled]="formulario.invalid"
+                [class.disabled]="formulario.invalid">
+          <span class="button-content">
+            <i class="pi pi-save"></i>
+            <span>Guardar Obra</span>
+          </span>
+          <span class="button-effect"></span>
+        </button>
+      </div>
+    </form>
+  </div>

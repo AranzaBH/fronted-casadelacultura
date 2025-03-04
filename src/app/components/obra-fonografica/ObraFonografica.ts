@@ -3,21 +3,19 @@ import { Estilos } from "../estilos/Estilos";
 
 export class ObraFonografica{
   id?:number;
-      titulo?:string;
-      lugar?:string;
-      anio?:number;
-      estilo?:Estilos;
-      origen?:string;
-      dimension?:string;
-      localizacion?:string;
-      fecha?:string;
-      clasificacion?:string;
-      ubicacion?:string;
-      observaciones?:string;
-      cantidad?:number;
+      titulo?:string;//
+      lugar?:string;//
+      anio?:number;//
+      estilo?:Estilos;//
+      origen?:string;//
+      fecha?:string;//
+      clasificacion?:string;//
+      ubicacion?:string;//
+      observaciones?:string;//
+      cantidad?:number;//
       fechaCreacion?:Date;
       activo?:boolean;
-    autores?:Autor[];
+    autores?:Autor[];//
     imagenes?:string[];
-    urlImagenPortada?:string;
+    urlImagenPortada?:string;//
 }
